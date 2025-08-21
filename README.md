@@ -47,11 +47,6 @@ Options clés:
 - `--verbose`: logs plus détaillés.
 - `--overwrite` / `--skip-existing`: comportement si le fichier final existe.
 - `--device auto|cuda|cpu`: périphérique d'exécution (par défaut `auto`). Utilisez `cuda` pour forcer le GPU si PyTorch CUDA est installé.
-- Segmentation par silences (VAD Silero, côté Whisper):
-  - `--vad-filter`: active la découpe aux pauses détectées.
-  - `--vad-min-silence-ms`: durée minimale (ms) d'un silence pour couper (ex: 500).
-  - `--vad-threshold`: seuil (0–1); plus haut = plus strict (moins de découpes).
-  - Remarque: ces options nécessitent `faster-whisper`. Installez-le: `pip install faster-whisper`.
 
 ## Structure du projet
 - `src/yt_whisper_scribe/`: logique applicative (pipeline, SRT utils).

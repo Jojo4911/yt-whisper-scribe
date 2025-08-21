@@ -28,10 +28,6 @@ def transcribe_youtube(
     device: str = "auto",
     temperature: float = 0.0,
     condition_on_previous_text: bool = True,
-    # VAD-based segmentation
-    vad_filter: bool = False,
-    vad_min_silence_ms: Optional[int] = None,
-    vad_threshold: Optional[float] = None,
     overwrite: bool = False,
     skip_existing: bool = False,
 ) -> str:
@@ -137,24 +133,8 @@ def transcribe_youtube(
 
     # Transcription
     try:
-        use_faster = False
-        fw_model = None
-        if vad_filter:
-            try:
-                from faster_whisper import WhisperModel  # type: ignore
-
-                use_faster = True
-                print(f"Chargement du modèle Faster-Whisper '{model}'...")
-                compute_type = "float16" if run_device == "cuda" else "int8"
-                fw_model = WhisperModel(model, device=run_device, compute_type=compute_type)
-            except Exception:
-                print(
-                    "Erreur: --vad-filter nécessite faster-whisper. Installez-le: 'pip install faster-whisper'"
-                )
-                raise SystemExit(6)
-        if not use_faster:
-            print(f"Chargement du modèle Whisper '{model}'...")
-            wmodel = whisper.load_model(model, device=run_device)
+        print(f"Chargement du modèle Whisper '{model}'...")
+        wmodel = whisper.load_model(model, device=run_device)
 
         # Progress timer + spinner during transcription
         stop_event = threading.Event()
@@ -193,7 +173,7 @@ def transcribe_youtube(
         spinner_thread.start()
 
         logging.info(
-            "Appel Whisper.transcribe: model=%s, device=%s, language=%s, task=%s, fp16=%s, temp=%.2f, cond_prev=%s, vad=%s",
+            "Appel Whisper.transcribe: model=%s, device=%s, language=%s, task=%s, fp16=%s, temp=%.2f, cond_prev=%s",
             model,
             run_device,
             language if language is not None else "auto",
@@ -201,46 +181,17 @@ def transcribe_youtube(
             (run_device == "cuda"),
             temperature,
             condition_on_previous_text,
-            vad_filter,
         )
 
-        # Build VAD parameters if any provided
-        vad_params = None
-        if vad_min_silence_ms is not None or vad_threshold is not None:
-            vad_params = {}
-            if vad_min_silence_ms is not None:
-                vad_params["min_silence_duration_ms"] = int(vad_min_silence_ms)
-            if vad_threshold is not None:
-                vad_params["vad_threshold"] = float(vad_threshold)
-
-        if use_faster and fw_model is not None:
-            segments_iter, info = fw_model.transcribe(
-                temp_audio_file,
-                initial_prompt=initial_prompt,
-                language=language,
-                task=task,
-                vad_filter=True,
-                vad_parameters=vad_params,
-                temperature=temperature,
-                condition_on_previous_text=condition_on_previous_text,
-            )
-            # Materialize segments to a dict similar to openai-whisper
-            segs = []
-            texts = []
-            for seg in segments_iter:
-                segs.append({"start": float(seg.start), "end": float(seg.end), "text": seg.text})
-                texts.append(seg.text)
-            result = {"segments": segs, "text": " ".join(t.strip() for t in texts).strip()}
-        else:
-            result = wmodel.transcribe(
-                temp_audio_file,
-                initial_prompt=initial_prompt,
-                fp16=(run_device == "cuda"),
-                language=language,
-                task=task,
-                temperature=temperature,
-                condition_on_previous_text=condition_on_previous_text,
-            )
+        result = wmodel.transcribe(
+            temp_audio_file,
+            initial_prompt=initial_prompt,
+            fp16=(run_device == "cuda"),
+            language=language,
+            task=task,
+            temperature=temperature,
+            condition_on_previous_text=condition_on_previous_text,
+        )
         t1 = time.monotonic()
         stop_event.set()
         spinner_thread.join(timeout=1)

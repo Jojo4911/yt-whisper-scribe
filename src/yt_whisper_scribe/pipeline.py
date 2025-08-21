@@ -28,6 +28,10 @@ def transcribe_youtube(
     device: str = "auto",
     temperature: float = 0.0,
     condition_on_previous_text: bool = True,
+    # VAD-based segmentation
+    vad_filter: bool = False,
+    vad_min_silence_ms: Optional[int] = None,
+    vad_threshold: Optional[float] = None,
     overwrite: bool = False,
     skip_existing: bool = False,
 ) -> str:
@@ -173,7 +177,7 @@ def transcribe_youtube(
         spinner_thread.start()
 
         logging.info(
-            "Appel Whisper.transcribe: model=%s, device=%s, language=%s, task=%s, fp16=%s, temp=%.2f, cond_prev=%s",
+            "Appel Whisper.transcribe: model=%s, device=%s, language=%s, task=%s, fp16=%s, temp=%.2f, cond_prev=%s, vad=%s",
             model,
             run_device,
             language if language is not None else "auto",
@@ -181,7 +185,17 @@ def transcribe_youtube(
             (run_device == "cuda"),
             temperature,
             condition_on_previous_text,
+            vad_filter,
         )
+
+        # Build VAD parameters if any provided
+        vad_params = None
+        if vad_min_silence_ms is not None or vad_threshold is not None:
+            vad_params = {}
+            if vad_min_silence_ms is not None:
+                vad_params["min_silence_duration_ms"] = int(vad_min_silence_ms)
+            if vad_threshold is not None:
+                vad_params["vad_threshold"] = float(vad_threshold)
 
         result = wmodel.transcribe(
             temp_audio_file,
@@ -191,6 +205,8 @@ def transcribe_youtube(
             task=task,
             temperature=temperature,
             condition_on_previous_text=condition_on_previous_text,
+            vad_filter=vad_filter,
+            vad_parameters=vad_params,
         )
         t1 = time.monotonic()
         stop_event.set()

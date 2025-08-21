@@ -46,6 +46,10 @@ Pendant la transcription, un compteur de temps et un spinner s’affichent. Une 
 - `--device auto|cuda|cpu`: périphérique d'exécution. `auto` choisit `cuda` si dispo, sinon `cpu`.
 - `--overwrite` / `--skip-existing`: comportement si le fichier de sortie existe déjà.
 - `--verbose`: logs plus détaillés.
+ - Segmentation par silences (VAD Silero via Whisper):
+   - `--vad-filter`: active la découpe aux pauses.
+   - `--vad-min-silence-ms`: durée minimale du silence (ms) pour couper.
+   - `--vad-threshold`: seuil (0–1), plus haut = plus strict.
 
 ## Notes
 - Les fichiers générés (.srt/.txt) et médias doivent être placés dans `data/` (ignoré par Git).

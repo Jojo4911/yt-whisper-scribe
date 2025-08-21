@@ -95,6 +95,24 @@ def build_parser() -> argparse.ArgumentParser:
             "Peut renforcer l'effet du prompt, utile si les termes apparaissent tard."
         ),
     )
+    # VAD-based segmentation (Silero VAD via Whisper)
+    parser.add_argument(
+        "--vad-filter",
+        action="store_true",
+        help="Active la segmentation par silences (Silero VAD) côté Whisper.",
+    )
+    parser.add_argument(
+        "--vad-min-silence-ms",
+        type=int,
+        default=None,
+        help="Durée minimale d'un silence pour déclencher une coupure (ms).",
+    )
+    parser.add_argument(
+        "--vad-threshold",
+        type=float,
+        default=None,
+        help="Seuil VAD (0–1); plus élevé = plus strict (moins de segments).",
+    )
     parser.add_argument(
         "--overwrite",
         action="store_true",
@@ -124,6 +142,9 @@ def main() -> None:
         device=args.device,
         temperature=args.temperature,
         condition_on_previous_text=(not args.no_condition_prev),
+        vad_filter=args.vad_filter,
+        vad_min_silence_ms=args.vad_min_silence_ms,
+        vad_threshold=args.vad_threshold,
         overwrite=args.overwrite,
         skip_existing=args.skip_existing,
     )

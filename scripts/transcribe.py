@@ -105,6 +105,17 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Ignore si le fichier de sortie existe déjà.",
     )
+    parser.add_argument(
+        "--replace-map",
+        type=str,
+        default=None,
+        help="Chemin vers un JSON de glossaire pour corrections post-transcription.",
+    )
+    parser.add_argument(
+        "--dry-run-replace",
+        action="store_true",
+        help="N'applique pas les remplacements; logge seulement les suggestions.",
+    )
     return parser
 
 
@@ -124,6 +135,8 @@ def main() -> None:
         device=args.device,
         temperature=args.temperature,
         condition_on_previous_text=(not args.no_condition_prev),
+        replace_map=args.replace_map,
+        dry_run_replace=args.dry_run_replace,
         overwrite=args.overwrite,
         skip_existing=args.skip_existing,
     )

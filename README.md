@@ -47,6 +47,9 @@ Options clés:
 - `--verbose`: logs plus détaillés.
 - `--overwrite` / `--skip-existing`: comportement si le fichier final existe.
 - `--device auto|cuda|cpu`: périphérique d'exécution (par défaut `auto`). Utilisez `cuda` pour forcer le GPU si PyTorch CUDA est installé.
+ - Post-traitement (glossaire de corrections):
+   - `--replace-map FILE.json`: active les remplacements basés sur un glossaire (variants -> terme correct).
+   - `--dry-run-replace`: suggère sans appliquer (journalise uniquement).
 
 ## Structure du projet
 - `src/yt_whisper_scribe/`: logique applicative (pipeline, SRT utils).

@@ -12,6 +12,7 @@ import threading
 import itertools
 
 from .srt import generate_srt_content
+from .replace import load_glossary, apply_glossary_replacements
 
 
 def transcribe_youtube(
@@ -28,6 +29,8 @@ def transcribe_youtube(
     device: str = "auto",
     temperature: float = 0.0,
     condition_on_previous_text: bool = True,
+    replace_map: Optional[str] = None,
+    dry_run_replace: bool = False,
     overwrite: bool = False,
     skip_existing: bool = False,
 ) -> str:
@@ -212,6 +215,22 @@ def transcribe_youtube(
                     f"Fichier existe déjà. Relancez avec --overwrite ou --skip-existing: {output_path}"
                 )
                 raise SystemExit(4)
+
+        # Optional post-replacements via glossary
+        if replace_map:
+            try:
+                glossary = load_glossary(replace_map)
+                new_segments, events = apply_glossary_replacements(result["segments"], glossary)
+                if dry_run_replace:
+                    logging.info("[replace] DRY RUN: %d suggestions", len(events))
+                else:
+                    result["segments"] = new_segments
+                    result["text"] = " ".join(seg.get("text", "").strip() for seg in new_segments).strip()
+                # Log events summary
+                if events:
+                    logging.info("[replace] %d remplacements (dont cross-boundary: %d)", len(events), sum(1 for e in events if e.kind == "cross_boundary"))
+            except Exception as e:  # noqa: BLE001
+                logging.warning(f"[replace] Erreur lors du chargement/application du glossaire: {e}")
 
         if output_format == "txt":
             content = result["text"]

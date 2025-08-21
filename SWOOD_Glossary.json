@@ -1,0 +1,1465 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "description": "SWOOD technical terms glossary for YouTube transcription correction",
+    "created_date": "2024-05-21",
+    "language": "English",
+    "total_entries": 29,
+    "total_variants": 139,
+    "categories_count": 7
+  },
+  "categories": {
+    "swood_design": {
+      "id": "swood_design",
+      "label": "SWOOD Design & Modeling",
+      "description": "Concepts related to the creation and structure of parametric 3D models, assemblies, and components within SWOOD Design.",
+      "color": "#3498db",
+      "icon": "📐",
+      "priority": 1
+    },
+    "cam_program": {
+      "id": "cam_program",
+      "label": "SWOOD CAM - Program & Tools",
+      "description": "Terms related to the setup and management of CAM programs, tools, aggregates, machines, and post-processors.",
+      "color": "#f39c12",
+      "icon": "🔧",
+      "priority": 2
+    },
+    "cam_operations": {
+      "id": "cam_operations",
+      "label": "SWOOD CAM - Operations & Machining",
+      "description": "Specific machining and nesting operations, strategies, and their associated parameters.",
+      "color": "#e74c3c",
+      "icon": "⚙️",
+      "priority": 3
+    },
+    "swood_report": {
+      "id": "swood_report",
+      "label": "SWOOD Report & Data Output",
+      "description": "Concepts related to the generation of production documents, data extraction, variables, and labeling.",
+      "color": "#2ecc71",
+      "icon": "📊",
+      "priority": 4
+    },
+    "swood_center": {
+      "id": "swood_center",
+      "label": "SWOOD Center & Automation",
+      "description": "Terms related to the automation of the design-to-production workflow using SWOOD Center.",
+      "color": "#9b59b6",
+      "icon": "🤖",
+      "priority": 5
+    },
+    "libraries_config": {
+      "id": "libraries_config",
+      "label": "Libraries & Configuration",
+      "description": "Terms related to the management of SWOOD's data structure, libraries, and global settings.",
+      "color": "#7f8c8d",
+      "icon": "📚",
+      "priority": 6
+    },
+    "core_ui": {
+      "id": "core_ui",
+      "label": "Core Concepts & UI",
+      "description": "Foundational terms and user interface elements within the SWOOD and SOLIDWORKS environment.",
+      "color": "#1abc9c",
+      "icon": "🖥️",
+      "priority": 7
+    }
+  },
+  "glossary": [
+    {
+      "id": "swood_core",
+      "correct_term": "SWOOD",
+      "detected_variants": [
+        "swood",
+        "s wood",
+        "as wood",
+        "this would",
+        "he would",
+        "s would",
+        "as good"
+      ],
+      "definition": "An integrated CAD/CAM software suite within SOLIDWORKS, specialized for the design and manufacturing of wood products.",
+      "category": "core_ui",
+      "confidence_keywords": [
+        "software",
+        "design",
+        "cam",
+        "report",
+        "center",
+        "module",
+        "suite",
+        "woodworking",
+        "industry"
+      ],
+      "anti_keywords": [
+        "hardwood",
+        "plywood",
+        "solid",
+        "natural",
+        "treated",
+        "real",
+        "as",
+        "this",
+        "he"
+      ],
+      "usage_examples": [
+        "Today, we will be using the SWOOD software to design our cabinet.",
+        "Make sure your SWOOD license is activated before starting."
+      ],
+      "priority": 1,
+      "frequency_score": 10,
+      "notes": "Core software name. Highest priority for detection and correction due to high phonetic confusion."
+    },
+    {
+      "id": "swood_design_module",
+      "correct_term": "SWOOD Design",
+      "detected_variants": [
+        "swood design",
+        "s wood design",
+        "as wood design",
+        "this would design"
+      ],
+      "definition": "The CAD module of SWOOD used for creating intelligent, parametric 3D models of furniture and wood products.",
+      "category": "swood_design",
+      "confidence_keywords": [
+        "module",
+        "cad",
+        "modeling",
+        "frame",
+        "panel",
+        "swoodbox",
+        "library",
+        "furniture"
+      ],
+      "anti_keywords": [
+        "camera",
+        "manufacturing",
+        "report",
+        "machining",
+        "toolpath"
+      ],
+      "usage_examples": [
+        "First, we'll create the main structure in SWOOD Design.",
+        "The SWOOD Design libraries contain all our parametric components."
+      ],
+      "priority": 1,
+      "frequency_score": 9,
+      "notes": "Key module name."
+    },
+    {
+      "id": "swood_cam_module",
+      "correct_term": "SWOOD CAM",
+      "detected_variants": [
+        "swood cam",
+        "s wood cam",
+        "as wood cam",
+        "this would cam",
+        "swood come",
+        "s would come"
+      ],
+      "definition": "The CAM module of SWOOD for creating CNC programs, defining toolpaths, and managing machining operations.",
+      "category": "cam_program",
+      "confidence_keywords": [
+        "module",
+        "machining",
+        "toolpath",
+        "cnc",
+        "operation",
+        "program",
+        "g-code",
+        "post-processor"
+      ],
+      "anti_keywords": [
+        "webcam",
+        "camera",
+        "video",
+        "security",
+        "streaming",
+        "design",
+        "model"
+      ],
+      "usage_examples": [
+        "Now, let's switch to SWOOD CAM to apply the machinings.",
+        "Generate the G-code directly from SWOOD CAM."
+      ],
+      "priority": 1,
+      "frequency_score": 9,
+      "notes": "Key module name. High risk of 'CAM' being misinterpreted."
+    },
+    {
+      "id": "swoodbox_component",
+      "correct_term": "SWOODBox",
+      "detected_variants": [
+        "swoodbox",
+        "swood box",
+        "s wood box",
+        "sweet box",
+        "as wood box",
+        "suit box",
+        "suit boox",
+        "sbox"
+      ],
+      "definition": "A smart, parametric sub-assembly that adapts to a defined space within a cabinet, adding components and associated machinings.",
+      "category": "swood_design",
+      "confidence_keywords": [
+        "insert",
+        "frame",
+        "parametric",
+        "assembly",
+        "parameters",
+        "rules",
+        "shelves",
+        "drawers"
+      ],
+      "anti_keywords": [
+        "chocolate",
+        "candy",
+        "gift",
+        "storage",
+        "container",
+        "lid",
+        "cardboard",
+        "wooden"
+      ],
+      "usage_examples": [
+        "We will insert a SWOODBox to add the drawer system.",
+        "The SWOODBox automatically creates the necessary drillings on adjacent panels."
+      ],
+      "priority": 1,
+      "frequency_score": 9,
+      "notes": "Unique and fundamental SWOOD concept."
+    },
+    {
+      "id": "swood_center_module",
+      "correct_term": "SWOOD Center",
+      "detected_variants": [
+        "swood center",
+        "s wood center",
+        "as wood center",
+        "this would center"
+      ],
+      "definition": "An automation module for batch processing SWOOD projects, generating production data from external sources without manual intervention.",
+      "category": "swood_center",
+      "confidence_keywords": [
+        "automation",
+        "batch",
+        "run",
+        "silent mode",
+        "erp",
+        "orders",
+        "generate"
+      ],
+      "anti_keywords": [
+        "shopping",
+        "community",
+        "recreation",
+        "medical",
+        "town"
+      ],
+      "usage_examples": [
+        "The entire production order was generated overnight using SWOOD Center.",
+        "SWOOD Center connects to our ERP to automate the workflow."
+      ],
+      "priority": 2,
+      "frequency_score": 4,
+      "notes": "Specialized automation module."
+    },
+    {
+      "id": "swooddata_folder",
+      "correct_term": "SWOODData",
+      "detected_variants": [
+        "swooddata",
+        "swood data",
+        "s wood data",
+        "as wood data",
+        "sweet data"
+      ],
+      "definition": "The central user directory containing all SWOOD libraries, configurations, tools, and post-processors.",
+      "category": "libraries_config",
+      "confidence_keywords": [
+        "directory",
+        "folder",
+        "path",
+        "library",
+        "configuration",
+        "settings",
+        "database"
+      ],
+      "anti_keywords": [
+        "analysis",
+        "visualization",
+        "report",
+        "big data",
+        "privacy"
+      ],
+      "usage_examples": [
+        "Make sure your SWOODData folder is located on a shared network drive.",
+        "All custom materials are saved within the SWOODData directory."
+      ],
+      "priority": 2,
+      "frequency_score": 7,
+      "notes": "Crucial for software configuration."
+    },
+    {
+      "id": "swoodrx_tool",
+      "correct_term": "SWOODRx",
+      "detected_variants": [
+        "swoodrx",
+        "swood rx",
+        "s wood directs",
+        "swood directs"
+      ],
+      "definition": "A dedicated support tool used to package and export project data for technical assistance.",
+      "category": "core_ui",
+      "confidence_keywords": [
+        "support",
+        "export",
+        "request",
+        "technical",
+        "package",
+        "data"
+      ],
+      "anti_keywords": [
+        "medical",
+        "prescription",
+        "pharmacy",
+        "doctor"
+      ],
+      "usage_examples": [
+        "Please use SWOODRx to send us your project files.",
+        "SWOODRx helps gather all the necessary information for support."
+      ],
+      "priority": 3,
+      "frequency_score": 2,
+      "notes": "Specific support utility."
+    },
+    {
+      "id": "swform_folder",
+      "correct_term": "SWForm",
+      "detected_variants": [
+        "swform",
+        "sw form",
+        "s w form",
+        "sw farm"
+      ],
+      "definition": "A specific folder within SWOODData that stores custom property files for the SOLIDWORKS Property Tab Builder.",
+      "category": "libraries_config",
+      "confidence_keywords": [
+        "folder",
+        "custom properties",
+        "property tab",
+        "swooddata",
+        "template"
+      ],
+      "anti_keywords": [
+        "fill",
+        "online",
+        "application",
+        "submit",
+        "google"
+      ],
+      "usage_examples": [
+        "The custom property template is saved in the SWForm folder.",
+        "You can customize the SWForm files to match your company's standards."
+      ],
+      "priority": 3,
+      "frequency_score": 3,
+      "notes": "Related to advanced customization."
+    },
+    {
+      "id": "frame_component",
+      "correct_term": "Frame",
+      "detected_variants": [
+        "frame",
+        "friend",
+        "frames"
+      ],
+      "definition": "The primary parametric assembly in SWOOD Design, representing the main carcass or structure of a cabinet.",
+      "category": "swood_design",
+      "confidence_keywords": [
+        "cabinet",
+        "carcass",
+        "swoodbox",
+        "panel",
+        "parametric",
+        "assembly",
+        "dimensions"
+      ],
+      "anti_keywords": [
+        "picture",
+        "window",
+        "door",
+        "bicycle",
+        "time frame",
+        "photo"
+      ],
+      "usage_examples": [
+        "First, we define the main dimensions of the Frame.",
+        "All panels are constrained to the Frame's main planes."
+      ],
+      "priority": 1,
+      "frequency_score": 8,
+      "notes": "Fundamental concept in SWOOD Design."
+    },
+    {
+      "id": "edgeband_feature",
+      "correct_term": "Edgeband",
+      "detected_variants": [
+        "edgeband",
+        "edge band",
+        "h band",
+        "edgeman"
+      ],
+      "definition": "A feature and material type applied to panel edges, defining their finish, shape, and thickness properties.",
+      "category": "swood_design",
+      "confidence_keywords": [
+        "panel",
+        "edge",
+        "material",
+        "thickness",
+        "banding",
+        "apply",
+        "veneer"
+      ],
+      "anti_keywords": [
+        "musical",
+        "group",
+        "rock",
+        "tour",
+        "concert"
+      ],
+      "usage_examples": [
+        "We will apply a 2mm PVC Edgeband to the front edges.",
+        "The Edgeband can add to the final dimension of the panel."
+      ],
+      "priority": 2,
+      "frequency_score": 7,
+      "notes": ""
+    },
+    {
+      "id": "panel_process_feature",
+      "correct_term": "Panel Process",
+      "detected_variants": [
+        "panel process",
+        "panel proposes",
+        "final process"
+      ],
+      "definition": "A library of definable post-design manufacturing steps, such as polishing or varnishing, applied to panels for cost calculation.",
+      "category": "swood_design",
+      "confidence_keywords": [
+        "library",
+        "cost",
+        "varnishing",
+        "polishing",
+        "finishing",
+        "apply",
+        "operation"
+      ],
+      "anti_keywords": [
+        "legal",
+        "due process",
+        "court",
+        "hearing",
+        "jury"
+      ],
+      "usage_examples": [
+        "The Panel Process for lacquering adds 20 euros to the cost.",
+        "You can define multiple Panel Process steps for each material."
+      ],
+      "priority": 3,
+      "frequency_score": 3,
+      "notes": "Used for cost estimation."
+    },
+    {
+      "id": "layout_feature",
+      "correct_term": "Layout Feature",
+      "detected_variants": [
+        "layout feature",
+        "layout teacher",
+        "layout feater"
+      ],
+      "definition": "A SWOOD Design feature for inserting and parametrically constraining a Frame into a larger master assembly.",
+      "category": "swood_design",
+      "confidence_keywords": [
+        "insert",
+        "assembly",
+        "constrain",
+        "frame",
+        "master",
+        "position",
+        "dimension"
+      ],
+      "anti_keywords": [
+        "magazine",
+        "page",
+        "graphic design",
+        "print",
+        "newspaper"
+      ],
+      "usage_examples": [
+        "Use the Layout Feature to position the kitchen cabinets.",
+        "The Layout Feature links the frame's dimensions to the sketch points."
+      ],
+      "priority": 3,
+      "frequency_score": 4,
+      "notes": "For creating large scenes or layouts."
+    },
+    {
+      "id": "panel_joint_feature",
+      "correct_term": "Panel Joint",
+      "detected_variants": [
+        "panel joint",
+        "panel joined",
+        "final joint"
+      ],
+      "definition": "A SWOOD Design feature that automatically creates complex wood joints by detecting interferences between panels.",
+      "category": "swood_design",
+      "confidence_keywords": [
+        "mortise",
+        "tenon",
+        "dovetail",
+        "halved",
+        "interference",
+        "connect",
+        "wood"
+      ],
+      "anti_keywords": [
+        "knee",
+        "elbow",
+        "hip",
+        "medical",
+        "arthritis",
+        "cannabis"
+      ],
+      "usage_examples": [
+        "The Panel Joint tool is perfect for creating quick mortise and tenon connections.",
+        "We used a Panel Joint to create the halved joint for the shelf."
+      ],
+      "priority": 2,
+      "frequency_score": 5,
+      "notes": ""
+    },
+    {
+      "id": "post_processor_file",
+      "correct_term": "Post-Processor",
+      "detected_variants": [
+        "post-processor",
+        "post processor",
+        "postpro",
+        "post pro",
+        "post process"
+      ],
+      "definition": "A configuration file in SWOOD CAM that translates toolpaths into the specific machine code for a CNC machine.",
+      "category": "cam_program",
+      "confidence_keywords": [
+        "cnc",
+        "g-code",
+        "machine",
+        "cam",
+        "file",
+        "output",
+        "generate"
+      ],
+      "anti_keywords": [
+        "photo",
+        "image",
+        "video",
+        "editing",
+        "adobe",
+        "filter"
+      ],
+      "usage_examples": [
+        "You need to select the correct Post-Processor for your Biesse machine.",
+        "We can customize the Post-Processor to format the output file."
+      ],
+      "priority": 1,
+      "frequency_score": 8,
+      "notes": "Essential link between software and machine."
+    },
+    {
+      "id": "aggregate_tool",
+      "correct_term": "Aggregate",
+      "detected_variants": [
+        "aggregate",
+        "a great",
+        "aggregates",
+        "arrogate"
+      ],
+      "definition": "A multi-spindle or angled tool holder for a CNC machine, defined in the SWOOD CAM library.",
+      "category": "cam_program",
+      "confidence_keywords": [
+        "tool",
+        "spindle",
+        "head",
+        "cnc",
+        "machining",
+        "drilling",
+        "horizontal"
+      ],
+      "anti_keywords": [
+        "data",
+        "total",
+        "sum",
+        "average",
+        "report",
+        "statistics"
+      ],
+      "usage_examples": [
+        "We need a horizontal Aggregate to drill the side holes.",
+        "The Aggregate library contains all our custom tool heads."
+      ],
+      "priority": 2,
+      "frequency_score": 6,
+      "notes": "High risk of phonetic confusion."
+    },
+    {
+      "id": "staydown_contour_op",
+      "correct_term": "Staydown Contour",
+      "detected_variants": [
+        "staydown contour",
+        "stay down contour",
+        "state down contour",
+        "stay down counter"
+      ],
+      "definition": "An optimized SWOOD CAM contouring operation for nesting that minimizes tool retractions between parts to reduce machining time.",
+      "category": "cam_operations",
+      "confidence_keywords": [
+        "nesting",
+        "machining",
+        "operation",
+        "toolpath",
+        "optimization",
+        "contouring",
+        "cam"
+      ],
+      "anti_keywords": [
+        "get up",
+        "sit down",
+        "remain",
+        "keep"
+      ],
+      "usage_examples": [
+        "Enable the Staydown Contour to speed up the nesting cycle.",
+        "The Staydown Contour links toolpaths between adjacent parts."
+      ],
+      "priority": 2,
+      "frequency_score": 5,
+      "notes": "Specific optimization feature."
+    },
+    {
+      "id": "mortising_op",
+      "correct_term": "Mortising",
+      "detected_variants": [
+        "mortising",
+        "more teasing",
+        "morticing",
+        "more testing"
+      ],
+      "definition": "A specific SWOOD CAM pocketing operation designed to create mortises with radius compensation for precise joints.",
+      "category": "cam_operations",
+      "confidence_keywords": [
+        "operation",
+        "pocketing",
+        "tenon",
+        "joint",
+        "wood",
+        "cnc",
+        "machining"
+      ],
+      "anti_keywords": [
+        "teasing",
+        "testing",
+        "appraising",
+        "analyzing"
+      ],
+      "usage_examples": [
+        "Use the Mortising operation for all the door lock cutouts.",
+        "The Mortising toolpath is different from a standard pocket."
+      ],
+      "priority": 3,
+      "frequency_score": 4,
+      "notes": ""
+    },
+    {
+      "id": "woodwop_software",
+      "correct_term": "WOODWOP",
+      "detected_variants": [
+        "woodwop",
+        "wood wop",
+        "wood wall",
+        "would walk"
+      ],
+      "definition": "The proprietary CAM software for HOMAG Group CNC machines, for which SWOOD CAM can generate specific compatible programs.",
+      "category": "cam_operations",
+      "confidence_keywords": [
+        "homag",
+        "cam",
+        "program",
+        "pocket",
+        "milling",
+        "cnc",
+        "software"
+      ],
+      "anti_keywords": [
+        "hip hop",
+        "music",
+        "dance",
+        "b-boy"
+      ],
+      "usage_examples": [
+        "This program will be exported in WOODWOP format.",
+        "SWOOD generates a .mpr file for WOODWOP."
+      ],
+      "priority": 2,
+      "frequency_score": 5,
+      "notes": "Third-party software integration."
+    },
+    {
+      "id": "offcut_material",
+      "correct_term": "Offcut",
+      "detected_variants": [
+        "offcut",
+        "off cut",
+        "of cut",
+        "offcat"
+      ],
+      "definition": "A reusable piece of leftover material from a nested panel, which SWOOD CAM can track and manage.",
+      "category": "cam_operations",
+      "confidence_keywords": [
+        "nesting",
+        "material",
+        "waste",
+        "reusable",
+        "sheet",
+        "panel",
+        "scrap"
+      ],
+      "anti_keywords": [
+        "on cut",
+        "switch off",
+        "power",
+        "light"
+      ],
+      "usage_examples": [
+        "The nesting generated a large Offcut that we can use later.",
+        "Manage the Offcut inventory in the board library."
+      ],
+      "priority": 2,
+      "frequency_score": 6,
+      "notes": "Key concept for material optimization."
+    },
+    {
+      "id": "typed_object_report",
+      "correct_term": "Typed Object",
+      "detected_variants": [
+        "typed object",
+        "type object",
+        "type project",
+        "typed project"
+      ],
+      "definition": "A powerful reporting feature to classify components based on rules, enabling the generation of specific lists (e.g., hardware).",
+      "category": "swood_report",
+      "confidence_keywords": [
+        "report",
+        "list",
+        "hardware",
+        "classification",
+        "category",
+        "data",
+        "variable"
+      ],
+      "anti_keywords": [
+        "keyboard",
+        "text",
+        "error",
+        "message",
+        "variable",
+        "code",
+        "string",
+        "integer"
+      ],
+      "usage_examples": [
+        "We created a Typed Object to list all the Blum hardware separately.",
+        "The condition for this Typed Object is based on a custom property."
+      ],
+      "priority": 2,
+      "frequency_score": 5,
+      "notes": "Advanced reporting feature."
+    },
+    {
+      "id": "loop_on_command",
+      "correct_term": "Loop-on",
+      "detected_variants": [
+        "loop-on",
+        "loop on",
+        "loop on an",
+        "new pawn"
+      ],
+      "definition": "A command used in SWOOD Report templates to iterate through a list of objects and display their data.",
+      "category": "swood_report",
+      "confidence_keywords": [
+        "report",
+        "template",
+        "command",
+        "iterate",
+        "object",
+        "list",
+        "process-on"
+      ],
+      "anti_keywords": [
+        "while",
+        "for",
+        "continue",
+        "television",
+        "video"
+      ],
+      "usage_examples": [
+        "Use a Loop-on command to list all the panels in the report.",
+        "Inside the Loop-on block, we will add the panel dimensions."
+      ],
+      "priority": 3,
+      "frequency_score": 3,
+      "notes": "Specific to custom report creation."
+    },
+    {
+      "id": "process_on_command",
+      "correct_term": "Process-on",
+      "detected_variants": [
+        "process-on",
+        "process on",
+        "process on an",
+        "proses on"
+      ],
+      "definition": "A command in SWOOD Report templates that defines for which object a specific document or file should be generated.",
+      "category": "swood_report",
+      "confidence_keywords": [
+        "report",
+        "template",
+        "command",
+        "generate",
+        "document",
+        "panel",
+        "loop-on"
+      ],
+      "anti_keywords": [
+        "continue",
+        "work on",
+        "focus on",
+        "based on"
+      ],
+      "usage_examples": [
+        "The Process-on command is set to 'Panel' to generate one label per panel.",
+        "We use Process-on 'Program' to export individual CNC files."
+      ],
+      "priority": 3,
+      "frequency_score": 3,
+      "notes": "Specific to custom report creation."
+    },
+    {
+      "id": "report_cfg_file",
+      "correct_term": "Report.cfg",
+      "detected_variants": [
+        "report.cfg",
+        "report that's cfg",
+        "report cfg",
+        "report.cfj"
+      ],
+      "definition": "The primary text-based configuration file that defines the structure, content, and behavior of a SWOOD Report.",
+      "category": "libraries_config",
+      "confidence_keywords": [
+        "file",
+        "configuration",
+        "settings",
+        "edit",
+        "swooddata",
+        "dat folder",
+        "text"
+      ],
+      "anti_keywords": [
+        "financial",
+        "annual",
+        "sales",
+        "document",
+        "pdf"
+      ],
+      "usage_examples": [
+        "You can edit the Report.cfg file to add a new document type.",
+        "All the report variables are defined in the Report.cfg."
+      ],
+      "priority": 3,
+      "frequency_score": 4,
+      "notes": "Advanced configuration file."
+    },
+    {
+      "id": "swoodcam_cfg_file",
+      "correct_term": "SWOODCAM.cfg",
+      "detected_variants": [
+        "swoodcam.cfg",
+        "swood cam cfg",
+        "swoodcam.cfj"
+      ],
+      "definition": "The configuration file for the SWOOD CAM module, controlling default behaviors and settings for manufacturing.",
+      "category": "libraries_config",
+      "confidence_keywords": [
+        "file",
+        "configuration",
+        "settings",
+        "cam",
+        "machining",
+        "post-processor"
+      ],
+      "anti_keywords": [],
+      "usage_examples": [
+        "Default tool speeds are set in the SWOODCAM.cfg.",
+        "To change the simulation colors, edit the SWOODCAM.cfg file."
+      ],
+      "priority": 3,
+      "frequency_score": 3,
+      "notes": "Advanced configuration file."
+    },
+    {
+      "id": "swooddesign_cfg_file",
+      "correct_term": "SWOODDesign.cfg",
+      "detected_variants": [
+        "swooddesign.cfg",
+        "swood design cfg",
+        "swooddesign.cfj"
+      ],
+      "definition": "The configuration file for the SWOOD Design module, managing settings related to modeling and libraries.",
+      "category": "libraries_config",
+      "confidence_keywords": [
+        "file",
+        "configuration",
+        "settings",
+        "design",
+        "library",
+        "materials"
+      ],
+      "anti_keywords": [],
+      "usage_examples": [
+        "The behavior of the Panel Joint can be configured in SWOODDesign.cfg.",
+        "We added a new panel type in the SWOODDesign.cfg."
+      ],
+      "priority": 3,
+      "frequency_score": 3,
+      "notes": "Advanced configuration file."
+    },
+    {
+      "id": "featuremanager_ui",
+      "correct_term": "FeatureManager",
+      "detected_variants": [
+        "featuremanager",
+        "feature manager",
+        "teacher manager"
+      ],
+      "definition": "The SOLIDWORKS design tree located on the left panel, which displays all SWOOD features, parts, and assemblies.",
+      "category": "core_ui",
+      "confidence_keywords": [
+        "solidworks",
+        "tree",
+        "design tree",
+        "part",
+        "assembly",
+        "feature",
+        "mate"
+      ],
+      "anti_keywords": [
+        "product",
+        "new feature",
+        "software",
+        "release"
+      ],
+      "usage_examples": [
+        "You can see the SWOODBox feature in the FeatureManager.",
+        "Right-click on the panel in the FeatureManager to edit it."
+      ],
+      "priority": 2,
+      "frequency_score": 8,
+      "notes": "Essential SOLIDWORKS UI term."
+    },
+    {
+      "id": "task_pane_ui",
+      "correct_term": "Task Pane",
+      "detected_variants": [
+        "task pane",
+        "task pain",
+        "test pane"
+      ],
+      "definition": "The SOLIDWORKS side panel on the right where SWOOD libraries (Frames, SWOODBoxes, Materials) are accessed.",
+      "category": "core_ui",
+      "confidence_keywords": [
+        "solidworks",
+        "library",
+        "swood",
+        "right side",
+        "panel",
+        "drag",
+        "drop"
+      ],
+      "anti_keywords": [
+        "to-do",
+        "list",
+        "microsoft",
+        "project",
+        "schedule",
+        "assign"
+      ],
+      "usage_examples": [
+        "Drag a material from the SWOOD Task Pane onto the panel.",
+        "Open the SWOOD libraries in the Task Pane."
+      ],
+      "priority": 2,
+      "frequency_score": 8,
+      "notes": "Essential SOLIDWORKS UI term."
+    },
+    {
+      "id": "propertymanager_ui",
+      "correct_term": "PropertyManager",
+      "detected_variants": [
+        "propertymanager",
+        "property manager",
+        "properly manager"
+      ],
+      "definition": "The SOLIDWORKS interface on the left panel that appears when creating or editing a SWOOD feature to configure its parameters.",
+      "category": "core_ui",
+      "confidence_keywords": [
+        "solidworks",
+        "feature",
+        "edit",
+        "options",
+        "parameters",
+        "left side",
+        "panel"
+      ],
+      "anti_keywords": [
+        "real estate",
+        "building",
+        "rental",
+        "lease",
+        "estate"
+      ],
+      "usage_examples": [
+        "Configure the panel's dimensions in the PropertyManager.",
+        "The PropertyManager allows you to select the connector type."
+      ],
+      "priority": 2,
+      "frequency_score": 8,
+      "notes": "Essential SOLIDWORKS UI term."
+    },
+    {
+      "id": "commandmanager_ui",
+      "correct_term": "CommandManager",
+      "detected_variants": [
+        "commandmanager",
+        "command manager",
+        "comment manager"
+      ],
+      "definition": "The main SOLIDWORKS toolbar at the top of the screen where the SWOOD CAM and SWOOD Design tabs are located.",
+      "category": "core_ui",
+      "confidence_keywords": [
+        "solidworks",
+        "toolbar",
+        "tab",
+        "icon",
+        "command",
+        "swood cam",
+        "swood design"
+      ],
+      "anti_keywords": [
+        "military",
+        "officer",
+        "army",
+        "navy",
+        "base"
+      ],
+      "usage_examples": [
+        "Click the 'Create a new panel' button in the CommandManager.",
+        "Switch to the SWOOD CAM tab in the CommandManager."
+      ],
+      "priority": 2,
+      "frequency_score": 7,
+      "notes": "Essential SOLIDWORKS UI term."
+    },
+    {
+      "id": "clamex_connector_op",
+      "correct_term": "Clamex",
+      "detected_variants": [
+        "clamex",
+        "clam ex",
+        "claim x",
+        "klex",
+        "clay max",
+        "clamix"
+      ],
+      "definition": "A specific connector system from Lamello, machined in SWOOD CAM using a disc-type cutter to create detachable furniture joints.",
+      "category": "cam_operations",
+      "confidence_keywords": [
+        "connector",
+        "Lamello",
+        "machining",
+        "operation",
+        "milling",
+        "cutter",
+        "groove",
+        "joint",
+        "disc"
+      ],
+      "anti_keywords": [
+        "sea",
+        "ocean",
+        "beach",
+        "shell",
+        "chowder",
+        "insurance",
+        "file",
+        "assert"
+      ],
+      "usage_examples": [
+        "Use the automatic Clamex operation to machine the grooves for the connectors.",
+        "The 'Clamex with milling tool' is required when an angular gear unit is not available for the saw."
+      ],
+      "priority": 2,
+      "frequency_score": 6,
+      "notes": "Brand name connector (Lamello) with specific machining requirements. High risk of misspelling or phonetic confusion."
+    },
+    {
+      "id": "dado_joint_connector",
+      "correct_term": "DADO",
+      "detected_variants": [
+        "dado",
+        "dabo",
+        "dido",
+        "dado joint"
+      ],
+      "definition": "A wood joint creating a slot in one panel to receive another, implemented as a specific connector type in SWOOD Design.",
+      "category": "swood_design",
+      "confidence_keywords": [
+        "joint",
+        "connector",
+        "panel",
+        "groove",
+        "slot",
+        "shelf",
+        "tenon",
+        "woodworking"
+      ],
+      "anti_keywords": [
+        "database",
+        "report",
+        "information",
+        "file",
+        "analysis",
+        "bytes",
+        "software",
+        "export"
+      ],
+      "usage_examples": [
+        "We will connect the shelf to the side panel using a DADO joint.",
+        "The DADO connector automatically generates the required groove."
+      ],
+      "priority": 2,
+      "frequency_score": 6,
+      "notes": "A fundamental woodworking joint implemented as a SWOOD connector. High risk of phonetic confusion with the word 'data'."
+    },
+    {
+      "id": "ovvo_connector",
+      "correct_term": "OVVO",
+      "detected_variants": [
+        "ovvo",
+        "ovo",
+        "oh vo",
+        "hovo",
+        "uvvo"
+      ],
+      "definition": "A specific brand of tool-free, push-fit connectors for creating invisible, strong joints, available as a connector type in SWOOD Design.",
+      "category": "swood_design",
+      "confidence_keywords": [
+        "connector",
+        "joint",
+        "panel",
+        "assembly",
+        "push-fit",
+        "invisible",
+        "tool-free",
+        "machining",
+        "groove"
+      ],
+      "anti_keywords": [
+        "egg",
+        "breakfast",
+        "scrambled",
+        "fried",
+        "poached",
+        "biology",
+        "cell",
+        "ovum",
+        "fertilization"
+      ],
+      "usage_examples": [
+        "The assembly uses OVVO connectors for quick, tool-free installation on site.",
+        "You need to select the correct OVVO machining profile in SWOOD CAM."
+      ],
+      "priority": 3,
+      "frequency_score": 4,
+      "notes": "Brand name for a specific push-fit connector. Prone to phonetic misinterpretation as 'ovo'."
+    },
+    {
+      "id": "lamello_brand_connector",
+      "correct_term": "Lamello",
+      "detected_variants": [
+        "lamello",
+        "la mello",
+        "la mellow",
+        "lomello",
+        "lamelo"
+      ],
+      "definition": "A brand of joinery systems providing specific connector types, like the biscuit joint, for panel assembly in SWOOD Design.",
+      "category": "swood_design",
+      "confidence_keywords": [
+        "connector",
+        "joint",
+        "biscuit",
+        "groove",
+        "clamex",
+        "p-system",
+        "panel",
+        "machining",
+        "assembly"
+      ],
+      "anti_keywords": [
+        "music",
+        "sound",
+        "color",
+        "feeling",
+        "mood",
+        "wine",
+        "cheese",
+        "mellow"
+      ],
+      "usage_examples": [
+        "Use a Lamello connector to create a strong biscuit joint between the two panels.",
+        "The Clamex is part of the Lamello P-System, requiring a specific toolpath."
+      ],
+      "priority": 2,
+      "frequency_score": 7,
+      "notes": "A specific brand name for joinery systems. It's both a library category and a type of connector."
+    },
+    {
+      "id": "hettich_hardware_supplier",
+      "correct_term": "Hettich",
+      "detected_variants": [
+        "hettich",
+        "hetich",
+        "hettick",
+        "hey tech",
+        "hetec"
+      ],
+      "definition": "A major hardware supplier providing a wide range of components like drawer systems, hinges, and connectors available in SWOOD Design libraries.",
+      "category": "swood_design",
+      "confidence_keywords": [
+        "hardware",
+        "hinge",
+        "drawer",
+        "runner",
+        "slide",
+        "connector",
+        "fittings",
+        "supplier",
+        "library"
+      ],
+      "anti_keywords": [
+        "blum",
+        "hafele",
+        "lamello",
+        "ovvo",
+        "grass",
+        "generic",
+        "standard",
+        "custom"
+      ],
+      "usage_examples": [
+        "For this project, we will use the Hettich drawer system for the main cabinets.",
+        "You can find all the Hettich components in their dedicated library folder."
+      ],
+      "priority": 2,
+      "frequency_score": 6,
+      "notes": "A major multi-product hardware supplier (connectors, drawers, hinges). Its name can be misspelled or misheard."
+    },
+    {
+      "id": "blum_hardware_supplier",
+      "correct_term": "Blum",
+      "detected_variants": [
+        "blum",
+        "bloom",
+        "plumb",
+        "blam",
+        "blumm"
+      ],
+      "definition": "A prominent hardware manufacturer known for its drawer systems, hinges, and lift systems, integrated into dedicated SWOOD Design libraries.",
+      "category": "swood_design",
+      "confidence_keywords": [
+        "hardware",
+        "hinge",
+        "drawer",
+        "runner",
+        "slide",
+        "lift system",
+        "supplier",
+        "library",
+        "BLUMOTION",
+        "import"
+      ],
+      "anti_keywords": [
+        "flower",
+        "garden",
+        "spring",
+        "rose",
+        "petal",
+        "blossom",
+        "plumbing",
+        "pipe",
+        "faucet",
+        "drain"
+      ],
+      "usage_examples": [
+        "This cabinet design uses the Blum LEGRABOX drawer system.",
+        "We will use the Blum Import feature to bring in the configuration from their website."
+      ],
+      "priority": 2,
+      "frequency_score": 7,
+      "notes": "A key multi-product hardware supplier with a dedicated import tool. High brand recognition. Can be confused with 'bloom' or 'plumb'."
+    },
+    {
+      "id": "eficad_company",
+      "correct_term": "EFICAD",
+      "detected_variants": [
+        "eficad",
+        "efi cad",
+        "ephica",
+        "efficad",
+        "ef cad"
+      ],
+      "definition": "The French software development company and publisher of the entire SWOOD suite, specializing in woodworking solutions.",
+      "category": "core_ui",
+      "confidence_keywords": [
+        "swood",
+        "company",
+        "publisher",
+        "developer",
+        "software",
+        "license",
+        "support",
+        "agreement",
+        "france"
+      ],
+      "anti_keywords": [
+        "autodesk",
+        "autocad",
+        "catia",
+        "solidworks",
+        "lead",
+        "read",
+        "deed",
+        "immigration"
+      ],
+      "usage_examples": [
+        "The SWOOD software suite is developed and owned by EFICAD.",
+        "For licensing inquiries, you should contact EFICAD directly."
+      ],
+      "priority": 2,
+      "frequency_score": 5,
+      "notes": "The parent company and publisher of SWOOD."
+    },
+    {
+      "id": "solidworks_cad_software",
+      "correct_term": "SolidWorks",
+      "detected_variants": [
+        "solidworks",
+        "solid works",
+        "solid work",
+        "solidwerks",
+        "solo works",
+        "salad works"
+      ],
+      "definition": "The 3D CAD software platform on which the SWOOD suite operates as a fully integrated add-in.",
+      "category": "core_ui",
+      "confidence_keywords": [
+        "swood",
+        "add-in",
+        "integrated",
+        "cad",
+        "software",
+        "featuremanager",
+        "task pane",
+        "assembly",
+        "part",
+        "model"
+      ],
+      "anti_keywords": [
+        "ethic",
+        "craftsmanship",
+        "quality",
+        "effort",
+        "public works",
+        "fireworks",
+        "salad",
+        "recipe",
+        "kitchen",
+        "art"
+      ],
+      "usage_examples": [
+        "SWOOD is a fully integrated add-in for SolidWorks.",
+        "You can see the SWOOD features directly in the SolidWorks FeatureManager tree."
+      ],
+      "priority": 1,
+      "frequency_score": 10,
+      "notes": "The foundational CAD software for SWOOD. Included because it is a fully integrated add-in and its UI elements are essential to describe workflows."
+    },
+    {
+      "id": "hinge_hardware_component",
+      "correct_term": "hinge",
+      "detected_variants": [
+        "ines",
+        "hinche",
+        "engine",
+        "inche"
+      ],
+      "definition": "A hardware component allowing doors to pivot, typically inserted and machined via a dedicated SWOODBox in SWOOD Design.",
+      "category": "swood_design",
+      "confidence_keywords": [
+        "door",
+        "cabinet",
+        "swoodbox",
+        "insert",
+        "component",
+        "hardware",
+        "blum",
+        "hettich",
+        "pivot",
+        "mounting plate"
+      ],
+      "anti_keywords": [
+        "car",
+        "motor",
+        "vehicle",
+        "engine",
+        "boat",
+        "speed",
+        "rpm",
+        "feet",
+        "centimeters",
+        "measurement",
+        "ruler",
+        "tape"
+      ],
+      "usage_examples": [
+        "Now we will insert the hinges into the door using a dedicated SWOODBox.",
+        "The properties of the hinges can be adjusted after insertion."
+      ],
+      "priority": 2,
+      "frequency_score": 8,
+      "notes": "A fundamental hardware component in cabinet design. The variants 'ines' and 'inches' are key phonetic errors to catch."
+    }
+  ]
+}

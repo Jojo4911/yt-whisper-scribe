@@ -38,7 +38,7 @@ python scripts/transcribe.py "URL_YOUTUBE" --output_format txt --output_dir data
 Pendant la transcription, un compteur de temps et un spinner s’affichent; à la fin, la durée exacte de la transcription est indiquée.
 
 Options clés:
-- `--model {tiny,base,small,medium,large,large-v2,large-v3}`: modèle Whisper. `large` suit l'alias du package installé; utilisez `large-v3` pour forcer explicitement v3.
+- `--model {tiny,base,small,medium,large,large-v2,large-v3,large-v3-turbo,turbo}`: modèle Whisper. `large` suit l'alias; `turbo` est un raccourci pour `large-v3-turbo` (selon la version du package installé).
 - `--output_format {srt,txt}`: format de sortie.
 - `--output_dir PATH`: dossier de sortie (créé si absent).
 - `--vocab_file FILE`: vocabulaire personnalisé (1 terme par ligne).

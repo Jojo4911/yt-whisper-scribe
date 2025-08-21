@@ -24,9 +24,19 @@ def build_parser() -> argparse.ArgumentParser:
         "--model",
         type=str,
         default="base",
-        choices=["tiny", "base", "small", "medium", "large", "large-v2", "large-v3"],
+        choices=[
+            "tiny",
+            "base",
+            "small",
+            "medium",
+            "large",
+            "large-v2",
+            "large-v3",
+            "large-v3-turbo",
+            "turbo",
+        ],
         help=(
-            "Modèle Whisper à utiliser (inclut large-v3). "
+            "Modèle Whisper à utiliser (inclut large‑v3‑turbo via 'turbo'). "
             "Note: 'large' suit l'alias du package installé."
         ),
     )

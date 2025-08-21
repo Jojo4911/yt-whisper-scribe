@@ -136,8 +136,10 @@ def transcribe_youtube(
 
     # Transcription
     try:
-        print(f"Chargement du modèle Whisper '{model}'...")
-        wmodel = whisper.load_model(model, device=run_device)
+        # Map shorthand 'turbo' to 'large-v3-turbo' for convenience
+        selected_model = "large-v3-turbo" if model == "turbo" else model
+        print(f"Chargement du modèle Whisper '{selected_model}'...")
+        wmodel = whisper.load_model(selected_model, device=run_device)
 
         # Progress timer + spinner during transcription
         stop_event = threading.Event()
@@ -177,7 +179,7 @@ def transcribe_youtube(
 
         logging.info(
             "Appel Whisper.transcribe: model=%s, device=%s, language=%s, task=%s, fp16=%s, temp=%.2f, cond_prev=%s",
-            model,
+            selected_model,
             run_device,
             language if language is not None else "auto",
             task,

@@ -1,0 +1,22 @@
+# Environnements
+.venv/
+env/
+
+# Python
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Données et artéfacts locaux
+data/
+*.m4a
+*.mp3
+*.wav
+
+# Sorties de démo (facultatif)
+*.srt
+*.txt
+
+# OS
+.DS_Store
+Thumbs.db

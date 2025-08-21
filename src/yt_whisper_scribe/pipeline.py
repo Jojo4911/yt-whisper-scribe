@@ -26,6 +26,8 @@ def transcribe_youtube(
     audio_format: str = "m4a",
     verbose: bool = False,
     device: str = "auto",
+    temperature: float = 0.0,
+    condition_on_previous_text: bool = True,
     overwrite: bool = False,
     skip_existing: bool = False,
 ) -> str:
@@ -113,9 +115,19 @@ def transcribe_youtube(
     if vocab_file:
         try:
             with open(vocab_file, "r", encoding="utf-8") as f:
-                vocab = [line.strip() for line in f if line.strip()]
-                initial_prompt = ", ".join(vocab) + "."
-            logging.info(f"Vocabulaire chargé depuis {vocab_file}: {initial_prompt}")
+                vocab_terms = []
+                for line in f:
+                    s = line.strip()
+                    if not s or s.startswith("#"):
+                        continue
+                    vocab_terms.append(s)
+                initial_prompt = ", ".join(vocab_terms) if vocab_terms else None
+            if initial_prompt:
+                logging.info(
+                    "Vocabulaire chargé depuis %s (%d termes)", vocab_file, len(vocab_terms)
+                )
+                preview = initial_prompt if len(initial_prompt) <= 300 else initial_prompt[:300] + "…"
+                logging.info("Prompt initial (aperçu): %s", preview)
         except FileNotFoundError:
             logging.warning(f"Le fichier de vocabulaire '{vocab_file}' n'a pas été trouvé.")
 
@@ -160,12 +172,25 @@ def transcribe_youtube(
         spinner_thread = threading.Thread(target=_spinner, daemon=True)
         spinner_thread.start()
 
+        logging.info(
+            "Appel Whisper.transcribe: model=%s, device=%s, language=%s, task=%s, fp16=%s, temp=%.2f, cond_prev=%s",
+            model,
+            run_device,
+            language if language is not None else "auto",
+            task,
+            (run_device == "cuda"),
+            temperature,
+            condition_on_previous_text,
+        )
+
         result = wmodel.transcribe(
             temp_audio_file,
             initial_prompt=initial_prompt,
             fp16=(run_device == "cuda"),
             language=language,
             task=task,
+            temperature=temperature,
+            condition_on_previous_text=condition_on_previous_text,
         )
         t1 = time.monotonic()
         stop_event.set()

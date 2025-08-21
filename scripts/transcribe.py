@@ -49,8 +49,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--language",
         type=str,
-        default="en",
-        help="Langue forcée (ex: fr, en, auto). Par défaut: en. Utilisez 'auto' pour détection automatique.",
+        default="en",  # Laissez la langue par défaut en anglais
+        help="Langue forcée (ex: fr, en, auto). Par défaut: en.",
     )
     parser.add_argument(
         "--task",
@@ -79,6 +79,20 @@ def build_parser() -> argparse.ArgumentParser:
         help="Périphérique d'exécution (auto/cuda/cpu). 'cuda' force le GPU si disponible.",
     )
     parser.add_argument(
+        "--temperature",
+        type=float,
+        default=0.0,
+        help="Température Whisper (0.0 pour maximiser l'adhérence au vocabulaire).",
+    )
+    parser.add_argument(
+        "--no-condition-prev",
+        action="store_true",
+        help=(
+            "Désactive l'utilisation du texte précédent comme contexte (condition_on_previous_text=False). "
+            "Peut renforcer l'effet du prompt, utile si les termes apparaissent tard."
+        ),
+    )
+    parser.add_argument(
         "--overwrite",
         action="store_true",
         help="Écrase le fichier de sortie s'il existe.",
@@ -105,6 +119,8 @@ def main() -> None:
         audio_format=args.audio_format,
         verbose=args.verbose,
         device=args.device,
+        temperature=args.temperature,
+        condition_on_previous_text=(not args.no_condition_prev),
         overwrite=args.overwrite,
         skip_existing=args.skip_existing,
     )

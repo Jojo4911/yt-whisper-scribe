@@ -221,14 +221,21 @@ def transcribe_youtube(
             try:
                 glossary = load_glossary(replace_map)
                 new_segments, events = apply_glossary_replacements(result["segments"], glossary)
+                total = len(events)
+                cross = sum(1 for e in events if e.kind == "cross_boundary")
                 if dry_run_replace:
-                    logging.info("[replace] DRY RUN: %d suggestions", len(events))
+                    logging.info("[replace] DRY RUN: %d suggestions", total)
+                    # Always show summary, even without --verbose
+                    print(f"[replace] Suggestions: {total} (cross-boundary: {cross})")
                 else:
                     result["segments"] = new_segments
                     result["text"] = " ".join(seg.get("text", "").strip() for seg in new_segments).strip()
-                # Log events summary
-                if events:
-                    logging.info("[replace] %d remplacements (dont cross-boundary: %d)", len(events), sum(1 for e in events if e.kind == "cross_boundary"))
+                    # Log and print summary
+                    if events:
+                        logging.info(
+                            "[replace] %d remplacements (dont cross-boundary: %d)", total, cross
+                        )
+                        print(f"[replace] Replacements applied: {total} (cross-boundary: {cross})")
             except Exception as e:  # noqa: BLE001
                 logging.warning(f"[replace] Erreur lors du chargement/application du glossaire: {e}")
 

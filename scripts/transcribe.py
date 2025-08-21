@@ -24,8 +24,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--model",
         type=str,
         default="base",
-        choices=["tiny", "base", "small", "medium", "large"],
-        help="Modèle Whisper à utiliser.",
+        choices=["tiny", "base", "small", "medium", "large", "large-v2", "large-v3"],
+        help=(
+            "Modèle Whisper à utiliser (inclut large-v3). "
+            "Note: 'large' suit l'alias du package installé."
+        ),
     )
     parser.add_argument(
         "--output_format",

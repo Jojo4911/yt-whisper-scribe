@@ -127,6 +127,12 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="N'applique pas les remplacements; logge seulement les suggestions.",
     )
+    parser.add_argument(
+        "--cookies-file",
+        type=str,
+        default=None,
+        help="Chemin vers un cookies.txt exporté du navigateur (yt-dlp)",
+    )
     return parser
 
 
@@ -152,6 +158,7 @@ def main() -> None:
         dry_run_replace=args.dry_run_replace,
         overwrite=args.overwrite,
         skip_existing=args.skip_existing,
+        cookies_file=args.cookies_file,
     )
 
     # Global elapsed time from CLI start to end

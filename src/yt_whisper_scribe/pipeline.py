@@ -33,6 +33,7 @@ def transcribe_youtube(
     dry_run_replace: bool = False,
     overwrite: bool = False,
     skip_existing: bool = False,
+    cookies_file: Optional[str] = None,
 ) -> str:
     """Download audio from YouTube, run Whisper, and write output.
 
@@ -84,6 +85,25 @@ def transcribe_youtube(
     print(f"Téléchargement de l'audio depuis : {url}")
     temp_stem = os.path.join(output_dir, "temp_audio")
     preferredcodec = audio_format
+    # Optional cookies support: use provided path or auto-detect data/cookies.txt
+    def _autodetect_cookies() -> Optional[str]:
+        candidates = []
+        if cookies_file:
+            candidates.append(cookies_file)
+        # Default candidate in CWD
+        candidates.append(os.path.join(os.getcwd(), "data", "cookies.txt"))
+        # Candidate relative to output_dir
+        candidates.append(os.path.join(os.path.abspath(output_dir), "..", "data", "cookies.txt"))
+        for c in candidates:
+            try:
+                if c and os.path.isfile(c):
+                    return os.path.abspath(c)
+            except Exception:
+                pass
+        return None
+
+    cookiefile_path = _autodetect_cookies()
+
     ydl_opts = {
         "format": "bestaudio[ext=m4a]/bestaudio/best",
         "postprocessors": [
@@ -97,6 +117,9 @@ def transcribe_youtube(
         "quiet": not verbose,
         "noplaylist": True,
     }
+    if cookiefile_path:
+        ydl_opts["cookiefile"] = cookiefile_path
+        logging.info("[cookies] Utilisation du cookies.txt: %s", cookiefile_path)
 
     info_dict = None
     for attempt in range(3):

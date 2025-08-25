@@ -159,7 +159,8 @@
         "this would cam",
         "swood come",
         "s would come",
-        "Swoodcam"
+        "Swoodcam",
+        "suit cam"
       ],
       "definition": "The CAM module of SWOOD for creating CNC programs, defining toolpaths, and managing machining operations.",
       "category": "cam_program",

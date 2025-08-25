@@ -50,8 +50,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--output_dir",
         type=str,
-        default=".",
-        help="Dossier de sortie (sera créé s'il n'existe pas).",
+        default="data",
+        help="Dossier de sortie (défaut: data/, créé s'il n'existe pas).",
     )
     parser.add_argument(
         "--vocab_file",

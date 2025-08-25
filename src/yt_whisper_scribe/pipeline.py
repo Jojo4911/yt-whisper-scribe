@@ -20,7 +20,7 @@ def transcribe_youtube(
     *,
     model: str = "turbo",
     output_format: str = "srt",
-    output_dir: str = ".",
+    output_dir: str = "data",
     vocab_file: Optional[str] = None,
     language: Optional[str] = "en",
     task: str = "transcribe",

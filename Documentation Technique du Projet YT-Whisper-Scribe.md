@@ -23,7 +23,7 @@ Remarque: `transcribe_youtube.py` à la racine est conservé uniquement pour com
 3. Vocabulaire: lecture d’un fichier `.txt` (UTF-8), concaténé en prompt initial.
 4. Modèle Whisper: chargement du modèle (par défaut `turbo`, alias de `large-v3-turbo`) avec `device` (par défaut `cuda`).
 5. Transcription: appel `model.transcribe(...)` avec `language` (ou détection auto via `auto`) et `task` (`transcribe`/`translate`).
-6. Export: génération de contenu `.srt` via `generate_srt_content` ou texte brut via `result['text']`. Encodage `utf-8-sig` des SRT sous Windows. Les remplacements post-transcription sont activés par défaut via `SWOOD_Glossary.json`.
+6. Export: génération de contenu `.srt` via `generate_srt_content` ou texte brut via `result['text']`. Encodage `utf-8-sig` des SRT sous Windows. Dossier de sortie par défaut: `data/`. Les remplacements post-transcription sont activés par défaut via `SWOOD_Glossary.json`.
 7. Nettoyage: suppression du fichier audio temporaire.
 
 ## Codes de sortie (CLI)

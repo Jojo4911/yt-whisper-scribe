@@ -180,7 +180,6 @@ def transcribe_youtube(
             except Exception:
                 pass
 
-        print("Lancement de la transcription (cela peut prendre du temps)...")
         t0 = time.monotonic()
         spinner_thread = threading.Thread(target=_spinner, daemon=True)
         spinner_thread.start()

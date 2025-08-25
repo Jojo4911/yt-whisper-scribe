@@ -10,4 +10,3 @@ __all__ = [
     "format_timestamp",
     "generate_srt_content",
 ]
-

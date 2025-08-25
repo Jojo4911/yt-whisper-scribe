@@ -1,24 +1,24 @@
 from __future__ import annotations
 
-import os
-import re
-import sys
-import time
-import logging
-import shutil
-import platform
-from typing import Optional
-import threading
 import itertools
+import logging
+import os
+import platform
+import re
+import shutil
+import sys
+import threading
+import time
+from typing import Optional
 
+from .replace import apply_glossary_replacements, load_glossary
 from .srt import generate_srt_content
-from .replace import load_glossary, apply_glossary_replacements
 
 
 def transcribe_youtube(
     url: str,
     *,
-    model: str = "base",
+    model: str = "turbo",
     output_format: str = "srt",
     output_dir: str = ".",
     vocab_file: Optional[str] = None,
@@ -26,10 +26,10 @@ def transcribe_youtube(
     task: str = "transcribe",
     audio_format: str = "m4a",
     verbose: bool = False,
-    device: str = "auto",
+    device: str = "cuda",
     temperature: float = 0.0,
     condition_on_previous_text: bool = True,
-    replace_map: Optional[str] = None,
+    replace_map: Optional[str] = "SWOOD_Glossary.json",
     dry_run_replace: bool = False,
     overwrite: bool = False,
     skip_existing: bool = False,
@@ -117,19 +117,27 @@ def transcribe_youtube(
     initial_prompt = None
     if vocab_file:
         try:
-            with open(vocab_file, "r", encoding="utf-8") as f:
+            with open(vocab_file, encoding="utf-8") as f:
                 vocab_terms = []
                 for line in f:
                     s = line.strip()
                     if not s or s.startswith("#"):
                         continue
                     vocab_terms.append(s)
-                initial_prompt = ", ".join(vocab_terms) if vocab_terms else None
+                if vocab_terms:
+                    initial_prompt = ", ".join(vocab_terms)
+                    # Harmonisation avec la documentation: terminer par un point si absent
+                    if initial_prompt and initial_prompt[-1] not in ".!?…":
+                        initial_prompt += "."
+                else:
+                    initial_prompt = None
             if initial_prompt:
                 logging.info(
                     "Vocabulaire chargé depuis %s (%d termes)", vocab_file, len(vocab_terms)
                 )
-                preview = initial_prompt if len(initial_prompt) <= 300 else initial_prompt[:300] + "…"
+                preview = (
+                    initial_prompt if len(initial_prompt) <= 300 else initial_prompt[:300] + "…"
+                )
                 logging.info("Prompt initial (aperçu): %s", preview)
         except FileNotFoundError:
             logging.warning(f"Le fichier de vocabulaire '{vocab_file}' n'a pas été trouvé.")
@@ -231,7 +239,9 @@ def transcribe_youtube(
                     print(f"[replace] Suggestions: {total} (cross-boundary: {cross})")
                 else:
                     result["segments"] = new_segments
-                    result["text"] = " ".join(seg.get("text", "").strip() for seg in new_segments).strip()
+                    result["text"] = " ".join(
+                        seg.get("text", "").strip() for seg in new_segments
+                    ).strip()
                     # Log and print summary
                     if events:
                         logging.info(
@@ -239,7 +249,9 @@ def transcribe_youtube(
                         )
                         print(f"[replace] Replacements applied: {total} (cross-boundary: {cross})")
             except Exception as e:  # noqa: BLE001
-                logging.warning(f"[replace] Erreur lors du chargement/application du glossaire: {e}")
+                logging.warning(
+                    f"[replace] Erreur lors du chargement/application du glossaire: {e}"
+                )
 
         if output_format == "txt":
             content = result["text"]

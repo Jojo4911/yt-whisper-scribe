@@ -21,9 +21,9 @@ Remarque: `transcribe_youtube.py` à la racine est conservé uniquement pour com
 1. Préconditions: vérification `ffmpeg` dans le PATH.
 2. Téléchargement audio: `yt-dlp` + post-processing `FFmpegExtractAudio` vers `m4a` (ou `wav`).
 3. Vocabulaire: lecture d’un fichier `.txt` (UTF-8), concaténé en prompt initial.
-4. Modèle Whisper: chargement du modèle (`tiny`→`large`) avec `device` (`cpu`/`cuda`).
+4. Modèle Whisper: chargement du modèle (par défaut `turbo`, alias de `large-v3-turbo`) avec `device` (par défaut `cuda`).
 5. Transcription: appel `model.transcribe(...)` avec `language` (ou détection auto via `auto`) et `task` (`transcribe`/`translate`).
-6. Export: génération de contenu `.srt` via `generate_srt_content` ou texte brut via `result['text']`. Encodage `utf-8-sig` des SRT sous Windows.
+6. Export: génération de contenu `.srt` via `generate_srt_content` ou texte brut via `result['text']`. Encodage `utf-8-sig` des SRT sous Windows. Les remplacements post-transcription sont activés par défaut via `SWOOD_Glossary.json`.
 7. Nettoyage: suppression du fichier audio temporaire.
 
 ## Codes de sortie (CLI)
@@ -54,4 +54,3 @@ Pistes d’extension (non implémentées):
 - Les imports lourds (`torch`, `whisper`, `yt_dlp`) résident dans `pipeline.transcribe_youtube` pour permettre l’import des utilitaires SRT sans dépendances lors des tests.
 - Le prompt vocabulaire est construit en joignant les lignes non vides, séparées par des virgules et terminées par un point.
 - Sous Windows, l’encodage `utf-8-sig` des SRT améliore la compatibilité avec certains lecteurs.
-

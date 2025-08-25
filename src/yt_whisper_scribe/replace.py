@@ -34,7 +34,9 @@ def _apply_within_segment(text: str, pat: re.Pattern[str], replacement: str) -> 
     return new_text, n
 
 
-def _apply_cross_boundary(prev_text: str, next_text: str, pat: re.Pattern[str], replacement: str) -> Tuple[str, str, int]:
+def _apply_cross_boundary(
+    prev_text: str, next_text: str, pat: re.Pattern[str], replacement: str
+) -> Tuple[str, str, int]:
     # Examine boundary region
     tail = prev_text[-40:]
     head = next_text[:40]
@@ -65,7 +67,7 @@ def _apply_cross_boundary(prev_text: str, next_text: str, pat: re.Pattern[str], 
 
 
 def load_glossary(path: str | Path) -> Dict[str, Any]:
-    with open(path, "r", encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         return json.load(f)
 
 
@@ -144,4 +146,3 @@ def apply_glossary_replacements(
             new_segments[i + 1]["text"] = right
 
     return new_segments, events
-

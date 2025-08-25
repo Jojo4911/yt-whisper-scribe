@@ -118,7 +118,8 @@
         "swood design",
         "s wood design",
         "as wood design",
-        "this would design"
+        "this would design",
+        "suit design"
       ],
       "definition": "The CAD module of SWOOD used for creating intelligent, parametric 3D models of furniture and wood products.",
       "category": "swood_design",
@@ -198,7 +199,8 @@
         "as wood box",
         "suit box",
         "suit boox",
-        "sbox"
+        "sbox",
+        "Suitbox"
       ],
       "definition": "A smart, parametric sub-assembly that adapts to a defined space within a cabinet, adding components and associated machinings.",
       "category": "swood_design",
@@ -1130,7 +1132,8 @@
         "dado",
         "dabo",
         "dido",
-        "dado joint"
+        "dado joint",
+        "the do"
       ],
       "definition": "A wood joint creating a slot in one panel to receive another, implemented as a specific connector type in SWOOD Design.",
       "category": "swood_design",
@@ -1338,7 +1341,8 @@
         "efi cad",
         "ephica",
         "efficad",
-        "ef cad"
+        "ef cad",
+        "efficat"
       ],
       "definition": "The French software development company and publisher of the entire SWOOD suite, specializing in woodworking solutions.",
       "category": "core_ui",

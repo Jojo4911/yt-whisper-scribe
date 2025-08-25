@@ -34,4 +34,3 @@ def generate_srt_content(result: dict) -> str:
         text = segment["text"].strip()
         srt_content.append(f"{i}\n{start_time} --> {end_time}\n{text}\n")
     return "\n".join(srt_content)
-

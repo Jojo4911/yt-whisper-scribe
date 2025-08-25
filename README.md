@@ -38,7 +38,7 @@ python scripts/transcribe.py "URL_YOUTUBE" --output_format txt --output_dir data
 Pendant la transcription, un compteur de temps et un spinner s’affichent; à la fin, la durée exacte de la transcription est indiquée.
 
 Options clés:
-- `--model {tiny,base,small,medium,large,large-v2,large-v3,large-v3-turbo,turbo}`: modèle Whisper. `large` suit l'alias; `turbo` est un raccourci pour `large-v3-turbo` (selon la version du package installé).
+- `--model {tiny,base,small,medium,large,large-v2,large-v3,large-v3-turbo,turbo}`: modèle Whisper (défaut: `turbo`). `large` suit l'alias; `turbo` est un raccourci pour `large-v3-turbo` (selon la version du package installé).
 - `--output_format {srt,txt}`: format de sortie.
 - `--output_dir PATH`: dossier de sortie (créé si absent).
 - `--vocab_file FILE`: vocabulaire personnalisé (1 terme par ligne).
@@ -46,9 +46,9 @@ Options clés:
 - `--task transcribe|translate`: transcrire la langue source ou traduire en anglais.
 - `--verbose`: logs plus détaillés.
 - `--overwrite` / `--skip-existing`: comportement si le fichier final existe.
-- `--device auto|cuda|cpu`: périphérique d'exécution (par défaut `auto`). Utilisez `cuda` pour forcer le GPU si PyTorch CUDA est installé.
+- `--device auto|cuda|cpu`: périphérique d'exécution (défaut: `cuda`). Utilisez `auto` pour sélection automatique si besoin.
  - Post-traitement (glossaire de corrections):
-   - `--replace-map FILE.json`: active les remplacements basés sur un glossaire (variants -> terme correct).
+   - `--replace-map FILE.json`: active les remplacements basés sur un glossaire (variants -> terme correct). Par défaut, `SWOOD_Glossary.json` est appliqué.
    - `--dry-run-replace`: suggère sans appliquer (journalise uniquement).
 
 ## Structure du projet

@@ -23,7 +23,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--model",
         type=str,
-        default="base",
+        default="turbo",
         choices=[
             "tiny",
             "base",
@@ -87,9 +87,9 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--device",
         type=str,
-        default="auto",
+        default="cuda",
         choices=["auto", "cuda", "cpu"],
-        help="Périphérique d'exécution (auto/cuda/cpu). 'cuda' force le GPU si disponible.",
+        help="Périphérique d'exécution (auto/cuda/cpu). Par défaut: cuda.",
     )
     parser.add_argument(
         "--temperature",
@@ -118,8 +118,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--replace-map",
         type=str,
-        default=None,
-        help="Chemin vers un JSON de glossaire pour corrections post-transcription.",
+        default="SWOOD_Glossary.json",
+        help="Chemin vers un JSON de glossaire pour corrections post-transcription (défaut: SWOOD_Glossary.json).",
     )
     parser.add_argument(
         "--dry-run-replace",

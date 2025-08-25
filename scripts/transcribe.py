@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import sys
 from pathlib import Path
+import time
 
 # Supporte l'exécution directe sans installation (src-layout)
 try:  # pragma: no cover - chemin de prod
@@ -132,6 +133,8 @@ def build_parser() -> argparse.ArgumentParser:
 def main() -> None:
     parser = build_parser()
     args = parser.parse_args()
+
+    start = time.monotonic()
     transcribe_youtube(
         args.url,
         model=args.model,
@@ -150,6 +153,14 @@ def main() -> None:
         overwrite=args.overwrite,
         skip_existing=args.skip_existing,
     )
+
+    # Global elapsed time from CLI start to end
+    elapsed = time.monotonic() - start
+    h = int(elapsed // 3600)
+    m = int((elapsed % 3600) // 60)
+    s = int(elapsed % 60)
+    total_fmt = f"{h:02d}:{m:02d}:{s:02d}"
+    print(f"Temps total de la procédure: {total_fmt}")
 
 
 if __name__ == "__main__":

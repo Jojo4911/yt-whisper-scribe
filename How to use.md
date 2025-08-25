@@ -34,7 +34,7 @@ python scripts/transcribe.py "URL_YOUTUBE" --model medium --vocab_file examples/
 python scripts/transcribe.py "URL_YOUTUBE" --output_format txt --output_dir data/
 ```
 
-Pendant la transcription, un compteur de temps et un spinner s’affichent. Une fois terminée, la durée de la transcription est affichée.
+Pendant la transcription, un compteur de temps et un spinner s’affichent. Une fois terminée, la durée de la transcription est affichée, ainsi que le temps total global (depuis le lancement de la commande jusqu’à la fin).
 
 ## Options principales
  - `--model {tiny,base,small,medium,large,large-v2,large-v3,large-v3-turbo,turbo}`: modèle Whisper à utiliser (défaut: `turbo`). `large` suit l'alias; `turbo` est un raccourci pour `large-v3-turbo`.

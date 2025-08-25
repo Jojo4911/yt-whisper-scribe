@@ -45,7 +45,7 @@ Options clés:
 - `--language fr|en|auto`: langue forcée (défaut: `en`). Utilisez `auto` pour détection automatique.
 - `--task transcribe|translate`: transcrire la langue source ou traduire en anglais.
 - `--verbose`: logs plus détaillés.
-- `--overwrite` / `--skip-existing`: comportement si le fichier final existe.
+- `--overwrite` / `--skip-existing`: si le fichier final existe, il est écrasé par défaut. Utilisez `--skip-existing` pour conserver l'existant.
 - `--device auto|cuda|cpu`: périphérique d'exécution (défaut: `cuda`). Utilisez `auto` pour sélection automatique si besoin.
  - Post-traitement (glossaire de corrections):
    - `--replace-map FILE.json`: active les remplacements basés sur un glossaire (variants -> terme correct). Par défaut, `SWOOD_Glossary.json` est appliqué.

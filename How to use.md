@@ -44,7 +44,7 @@ Pendant la transcription, un compteur de temps et un spinner s’affichent. Une 
 - `--language fr|en|auto`: langue forcée (défaut: `en`). `auto` active la détection.
 - `--task transcribe|translate`: transcrire la langue source ou traduire en anglais.
 - `--device auto|cuda|cpu`: périphérique d'exécution (défaut: `cuda`). `auto` choisit `cuda` si dispo, sinon `cpu`.
-- `--overwrite` / `--skip-existing`: comportement si le fichier de sortie existe déjà.
+- `--overwrite` / `--skip-existing`: par défaut, les fichiers existants sont écrasés. Utilisez `--skip-existing` pour ne pas écraser.
 - `--verbose`: logs plus détaillés.
  - Post-traitement (glossaire):
    - `--replace-map FILE.json`: corrections intelligentes (variants -> terme correct) après transcription (défaut: `SWOOD_Glossary.json`).

@@ -215,16 +215,16 @@ def transcribe_youtube(
         safe_title = safe_title or "transcription"
         output_path = os.path.join(output_dir, f"{safe_title}.{output_format}")
 
-        # Existing file behavior
+        # Existing file behavior: overwrite by default unless --skip-existing is set
         if os.path.exists(output_path):
             if skip_existing:
                 print(f"Fichier existant détecté, opération ignorée: {output_path}")
                 return output_path
-            if not overwrite:
-                print(
-                    f"Fichier existe déjà. Relancez avec --overwrite ou --skip-existing: {output_path}"
-                )
-                raise SystemExit(4)
+            if overwrite:
+                logging.info("Fichier existant, écrasement demandé: %s", output_path)
+            else:
+                # Default behavior: overwrite existing file
+                print(f"[overwrite] Fichier existant, écrasement par défaut: {output_path}")
 
         # Optional post-replacements via glossary
         if replace_map:

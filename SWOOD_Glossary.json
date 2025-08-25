@@ -77,7 +77,8 @@
         "this would",
         "he would",
         "s would",
-        "as good"
+        "as good",
+        "SWOOT"
       ],
       "definition": "An integrated CAD/CAM software suite within SOLIDWORKS, specialized for the design and manufacturing of wood products.",
       "category": "core_ui",
@@ -239,7 +240,8 @@
         "swood center",
         "s wood center",
         "as wood center",
-        "this would center"
+        "this would center",
+        "SWOOT Center"
       ],
       "definition": "An automation module for batch processing SWOOD projects, generating production data from external sources without manual intervention.",
       "category": "swood_center",
@@ -275,7 +277,8 @@
         "swood data",
         "s wood data",
         "as wood data",
-        "sweet data"
+        "sweet data",
+        "SWOOT data"
       ],
       "definition": "The central user directory containing all SWOOD libraries, configurations, tools, and post-processors.",
       "category": "libraries_config",

@@ -78,7 +78,10 @@
         "he would",
         "s would",
         "as good",
-        "SWOOT"
+        "SWOOT",
+        "SUD",
+        "SOOD",
+        "suit"
       ],
       "definition": "An integrated CAD/CAM software suite within SOLIDWORKS, specialized for the design and manufacturing of wood products.",
       "category": "core_ui",
@@ -280,7 +283,8 @@
         "s wood data",
         "as wood data",
         "sweet data",
-        "SWOOT data"
+        "SWOOT data",
+        "suit data"
       ],
       "definition": "The central user directory containing all SWOOD libraries, configurations, tools, and post-processors.",
       "category": "libraries_config",

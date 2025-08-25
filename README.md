@@ -47,6 +47,8 @@ Options clés:
 - `--verbose`: logs plus détaillés.
 - `--overwrite` / `--skip-existing`: si le fichier final existe, il est écrasé par défaut. Utilisez `--skip-existing` pour conserver l'existant.
 - `--cookies-file FILE`: chemin vers un `cookies.txt` exporté du navigateur pour YouTube. Si non fourni, le projet tente `data/cookies.txt` automatiquement.
+  - **Variable d'environnement**: `YT_COOKIES_FILE` pour définir le chemin des cookies de manière sécurisée.
+  - **Nettoyage sécurisé**: utilisez `python scripts/clean_cookies.py` pour ne garder que les cookies YouTube.
 - `--device auto|cuda|cpu`: périphérique d'exécution (défaut: `cuda`). Utilisez `auto` pour sélection automatique si besoin.
  - Post-traitement (glossaire de corrections):
    - `--replace-map FILE.json`: active les remplacements basés sur un glossaire (variants -> terme correct). Par défaut, `SWOOD_Glossary.json` est appliqué.
@@ -64,6 +66,37 @@ Note: `transcribe_youtube.py` est conservé pour compatibilité, mais l’entré
 - Préférez `m4a` comme format audio intermédiaire (qualité/poids). Pour une qualité maximale, utilisez `wav` (fichiers plus gros).
 - Sous Windows, les fichiers SRT sont encodés en `utf-8-sig` pour une meilleure compatibilité.
 - Les vidéos longues nécessitent du temps/mémoire : ajustez le modèle et vérifiez que ffmpeg et PyTorch sont installés correctement.
+
+## Gestion sécurisée des cookies YouTube
+
+Pour contourner les restrictions YouTube sans exposer vos données personnelles :
+
+### Méthode 1 - Nettoyage automatique (Recommandée)
+```bash
+# Nettoie ton fichier cookies complet pour ne garder que YouTube
+python scripts/clean_cookies.py /chemin/vers/cookies_complets.txt data/cookies_youtube.txt
+
+# Utilise les cookies nettoyés
+python scripts/transcribe.py "URL" --cookies-file data/cookies_youtube.txt
+```
+
+### Méthode 2 - Variable d'environnement
+```bash
+# Configure la variable (session locale)
+export YT_COOKIES_FILE="/chemin/vers/cookies_youtube.txt"
+python scripts/transcribe.py "URL"  # Détection automatique
+```
+
+### Méthode 3 - Google Colab sécurisé
+```python
+# Dans Colab, utilise le setup sécurisé
+exec(open('examples/colab_setup.py').read())
+```
+
+**⚠️ Sécurité :**
+- Ne partagez JAMAIS votre fichier cookies complet
+- Utilisez toujours le script de nettoyage
+- Les cookies YouTube nettoyés ne contiennent pas de données sensibles
 
 ## Développement
 - Lint/format: `ruff check .` et `black .`

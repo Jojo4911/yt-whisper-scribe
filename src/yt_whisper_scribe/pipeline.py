@@ -90,6 +90,10 @@ def transcribe_youtube(
         candidates = []
         if cookies_file:
             candidates.append(cookies_file)
+        # Check environment variable first (secure option)
+        env_cookies = os.getenv("YT_COOKIES_FILE")
+        if env_cookies:
+            candidates.append(env_cookies)
         # Default candidate in CWD
         candidates.append(os.path.join(os.getcwd(), "data", "cookies.txt"))
         # Candidate relative to output_dir

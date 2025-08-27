@@ -1473,6 +1473,19 @@
       "priority": 2,
       "frequency_score": 8,
       "notes": "A fundamental hardware component in cabinet design. The variants 'ines' and 'inches' are key phonetic errors to catch."
+    },
+    {
+      "id": "typed_object_report",
+      "correct_term": "Typed Object",
+      "detected_variants": ["typed object", "type object", "typehead object", "typed project", "type project"],
+      "definition": "A classification mechanism in SWOOD Report that uses custom rules to identify and group components like hardware for specific lists.",
+      "category": "swood_report",
+      "confidence_keywords": ["report", "list", "hardware", "product", "classification", "category", "data", "variable", "condition", "rule"],
+      "anti_keywords": ["keyboard", "text", "message", "letter", "write", "string", "integer", "boolean", "variable type", "data type"],
+      "usage_examples": ["We will create a new Typed Object to list all the hardware components.", "The condition for this Typed Object is based on a custom property."],
+      "priority": 2,
+      "frequency_score": 6,
+      "notes": "A unique and powerful concept within SWOOD Report. The main confusions are 'type object' or the phonetic error 'typehead object'."
     }
   ]
 }

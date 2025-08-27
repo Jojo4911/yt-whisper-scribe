@@ -1,6 +1,6 @@
 """
-🚀 YT-WHISPER-SCRIBE - Configuration avancée pour Google Colab
-Intégration GitHub directe avec gestion sécurisée des cookies
+🚀 YT-WHISPER-SCRIBE - Configuration Colab CORRIGÉE
+Version sans erreur de syntaxe, testée pour Google Colab
 """
 
 import os
@@ -13,42 +13,49 @@ from typing import Optional
 GITHUB_REPO = "https://github.com/Jojo4911/yt-whisper-scribe.git"
 PROJECT_DIR = "/content/yt-whisper-scribe"
 COOKIES_SEARCH_PATHS = [
-    "/content/drive/MyDrive/yt-whisper-private/cookies_youtube.txt",  # Drive privé (recommandé)
-    "/content/drive/MyDrive/cookies_youtube.txt",                      # Drive racine
-    "/content/cookies_youtube.txt",                                    # Upload direct
-    "/content/cookies.txt",                                           # Upload direct (nom générique)
-    f"{PROJECT_DIR}/data/cookies.txt"                                  # Dossier projet
+    "/content/drive/MyDrive/yt-whisper-private/cookies_youtube.txt",
+    "/content/drive/MyDrive/cookies_youtube.txt", 
+    "/content/cookies_youtube.txt",
+    "/content/cookies.txt",
+    f"{PROJECT_DIR}/data/cookies.txt"
 ]
 
-# === SETUP COLAB ===
 def setup_colab_environment(force_reinstall: bool = False):
     """Configure l'environnement Colab avec intégration GitHub directe."""
     
-    print("🚀 YT-WHISPER-SCRIBE - SETUP COLAB AVANCÉ")
+    print("🚀 YT-WHISPER-SCRIBE - SETUP COLAB CORRIGÉ")
     print("=" * 60)
     
-    # 1. Vérification GPU
-    print("\n🎮 1. Vérification GPU...")
-    _check_gpu_availability()
-    
-    # 2. Clone/Update du projet depuis GitHub
-    print("\n📥 2. Récupération du projet depuis GitHub...")
-    _setup_project_from_github(force_reinstall)
-    
-    # 3. Installation des dépendances
-    print("\n📦 3. Installation des dépendances...")
-    _install_dependencies()
-    
-    # 4. Configuration des cookies
-    print("\n🍪 4. Configuration des cookies...")
-    _setup_cookies_management()
-    
-    # 5. Configuration Google Drive (optionnel)
-    print("\n☁️ 5. Configuration Google Drive...")
-    _setup_drive_integration()
-    
-    print("\n✅ Setup terminé! Vous pouvez maintenant utiliser transcribe_video()")
-    return True
+    try:
+        # 1. Vérification GPU
+        print("\n🎮 1. Vérification GPU...")
+        _check_gpu_availability()
+        
+        # 2. Clone/Update du projet depuis GitHub
+        print("\n📥 2. Récupération du projet depuis GitHub...")
+        success = _setup_project_from_github(force_reinstall)
+        if not success:
+            return False
+        
+        # 3. Installation des dépendances
+        print("\n📦 3. Installation des dépendances...")
+        _install_dependencies()
+        
+        # 4. Configuration des cookies
+        print("\n🍪 4. Configuration des cookies...")
+        _setup_cookies_management()
+        
+        # 5. Configuration Google Drive (optionnel)
+        print("\n☁️ 5. Configuration Google Drive...")
+        _setup_drive_integration()
+        
+        print("\n✅ Setup terminé! Utilisez transcribe_video(url)")
+        return True
+        
+    except Exception as e:
+        print(f"\n❌ Erreur durante la configuration: {e}")
+        print("🔧 Essayez la configuration manuelle...")
+        return _manual_setup()
 
 def _check_gpu_availability():
     """Vérifie la disponibilité du GPU."""
@@ -59,65 +66,85 @@ def _check_gpu_availability():
             gpu_memory = torch.cuda.get_device_properties(0).total_memory / 1e9
             print(f"✅ GPU détecté: {gpu_name} ({gpu_memory:.1f} GB)")
         else:
-            print("⚠️  CPU seulement - Activez le GPU: Runtime > Change runtime type > Hardware accelerator: GPU")
+            print("⚠️  CPU seulement - Activez le GPU: Runtime > Change runtime type > GPU")
     except ImportError:
         print("⚠️  PyTorch non encore installé")
 
 def _setup_project_from_github(force_reinstall: bool = False):
     """Clone ou met à jour le projet depuis GitHub."""
-    if os.path.exists(PROJECT_DIR) and force_reinstall:
-        print("🔄 Suppression de l'ancienne version...")
-        subprocess.run(["rm", "-rf", PROJECT_DIR], check=True)
-    
-    if not os.path.exists(PROJECT_DIR):
-        print(f"📥 Clonage depuis {GITHUB_REPO}...")
-        result = subprocess.run(["git", "clone", GITHUB_REPO, PROJECT_DIR], 
-                              capture_output=True, text=True)
-        if result.returncode != 0:
-            print(f"❌ Erreur de clonage: {result.stderr}")
-            return False
-        print("✅ Projet cloné avec succès")
-    else:
-        print("📂 Projet existant détecté")
+    try:
+        if os.path.exists(PROJECT_DIR) and force_reinstall:
+            print("🔄 Suppression de l'ancienne version...")
+            subprocess.run(["rm", "-rf", PROJECT_DIR], check=True)
+        
+        if not os.path.exists(PROJECT_DIR):
+            print(f"📥 Clonage depuis {GITHUB_REPO}...")
+            result = subprocess.run([
+                "git", "clone", GITHUB_REPO, PROJECT_DIR
+            ], capture_output=True, text=True)
+            
+            if result.returncode != 0:
+                print(f"❌ Erreur de clonage: {result.stderr}")
+                return False
+            print("✅ Projet cloné avec succès")
+        else:
+            print("📂 Projet existant détecté")
+            os.chdir(PROJECT_DIR)
+            print("🔄 Mise à jour depuis GitHub...")
+            subprocess.run(["git", "pull", "origin", "main"], capture_output=True)
+            print("✅ Projet mis à jour")
+        
         os.chdir(PROJECT_DIR)
-        print("🔄 Mise à jour depuis GitHub...")
-        subprocess.run(["git", "pull", "origin", "main"], capture_output=True)
-        print("✅ Projet mis à jour")
-    
-    os.chdir(PROJECT_DIR)
-    return True
+        return True
+        
+    except Exception as e:
+        print(f"❌ Erreur lors du clonage: {e}")
+        return False
 
 def _install_dependencies():
     """Installe les dépendances du projet."""
-    # Mise à jour des paquets système
-    subprocess.run(["apt-get", "update", "-qq"], check=True)
-    subprocess.run(["apt-get", "install", "-y", "ffmpeg"], check=True)
-    
-    # Installation des dépendances Python
-    subprocess.run(["pip", "install", "-r", "requirements.txt", "--quiet"], check=True)
-    
-    # Installation PyTorch avec CUDA (si pas déjà installé)
     try:
-        import torch
-        if not torch.cuda.is_available():
+        # Mise à jour des paquets système
+        subprocess.run(["apt-get", "update", "-qq"], check=True)
+        subprocess.run(["apt-get", "install", "-y", "ffmpeg"], check=True)
+        
+        # Installation des dépendances Python
+        subprocess.run([
+            "pip", "install", "-r", "requirements.txt", "--quiet"
+        ], check=True)
+        
+        # Installation PyTorch avec CUDA (si nécessaire)
+        try:
+            import torch
+            if not torch.cuda.is_available():
+                print("🔧 Installation de PyTorch avec CUDA...")
+                subprocess.run([
+                    "pip", "install", "torch", "torchvision", "torchaudio", 
+                    "--index-url", "https://download.pytorch.org/whl/cu121", "--quiet"
+                ], check=True)
+        except ImportError:
             print("🔧 Installation de PyTorch avec CUDA...")
             subprocess.run([
                 "pip", "install", "torch", "torchvision", "torchaudio", 
                 "--index-url", "https://download.pytorch.org/whl/cu121", "--quiet"
             ], check=True)
-    except ImportError:
-        print("🔧 Installation de PyTorch avec CUDA...")
-        subprocess.run([
-            "pip", "install", "torch", "torchvision", "torchaudio", 
-            "--index-url", "https://download.pytorch.org/whl/cu121", "--quiet"
-        ], check=True)
-    
-    print("✅ Dépendances installées")
+        
+        print("✅ Dépendances installées")
+        
+    except Exception as e:
+        print(f"❌ Erreur lors de l'installation: {e}")
+        raise
 
 def _setup_drive_integration():
     """Configure l'intégration avec Google Drive."""
     try:
-        from google.colab import drive
+        # Import dynamique pour éviter les erreurs hors Colab
+        try:
+            from google.colab import drive
+        except ImportError:
+            print("⚠️  Module google.colab non disponible")
+            return
+            
         if not os.path.exists("/content/drive"):
             print("🔗 Montage de Google Drive...")
             drive.mount('/content/drive')
@@ -130,8 +157,6 @@ def _setup_drive_integration():
         private_dir.mkdir(exist_ok=True)
         print(f"📁 Dossier privé créé: {private_dir}")
         
-    except ImportError:
-        print("⚠️  Module google.colab non disponible")
     except Exception as e:
         print(f"⚠️  Erreur Drive: {e}")
 
@@ -141,7 +166,6 @@ def _setup_cookies_management():
     
     if cookies_path:
         print(f"✅ Cookies détectés: {cookies_path}")
-        # Configuration de la variable d'environnement
         os.environ['YT_COOKIES_FILE'] = str(cookies_path)
         print("🔧 Variable YT_COOKIES_FILE configurée")
     else:
@@ -162,28 +186,50 @@ def _show_cookies_instructions():
 📋 POUR AJOUTER VOS COOKIES:
 
 1. Méthode recommandée (Google Drive):
-   - Nettoyez vos cookies: python scripts/clean_cookies.py cookies_complets.txt cookies_youtube.txt
-   - Uploadez cookies_youtube.txt dans: /content/drive/MyDrive/yt-whisper-private/
-   - Relancez setup_colab_environment()
+   - Exportez vos cookies depuis votre navigateur
+   - Utilisez clean_cookies_interactive() pour les nettoyer
+   - Sauvegardez dans /content/drive/MyDrive/yt-whisper-private/
 
 2. Upload direct:
-   - Utilisez l'interface Colab (icône dossier à gauche)
-   - Uploadez votre fichier cookies_youtube.txt
-   - Relancez setup_colab_environment()
+   - Uploadez cookies_youtube.txt via l'interface Colab
+   - Le système les détectera automatiquement
 
 ⚠️  SÉCURITÉ: Utilisez uniquement des cookies YouTube nettoyés!
     """)
 
+def _manual_setup():
+    """Configuration manuelle de secours."""
+    try:
+        print("🔧 Configuration manuelle...")
+        
+        # Clone du projet
+        if not os.path.exists(PROJECT_DIR):
+            subprocess.run([
+                'git', 'clone', GITHUB_REPO, PROJECT_DIR
+            ], check=True)
+        
+        os.chdir(PROJECT_DIR)
+        
+        # Installation basique
+        subprocess.run([
+            'pip', 'install', '-r', 'requirements.txt', '--quiet'
+        ], check=True)
+        
+        print("✅ Configuration manuelle terminée!")
+        return True
+        
+    except Exception as e:
+        print(f"❌ Configuration manuelle échouée: {e}")
+        return False
+
 def clean_cookies_interactive():
     """Nettoie interactivement un fichier cookies."""
     print("🧹 NETTOYAGE INTERACTIF DES COOKIES")
-    print("\n1. Uploadez votre fichier cookies.txt complet via l'interface Colab")
-    print("2. Exécutez cette fonction pour le nettoyer automatiquement")
     
     # Recherche du fichier cookies uploadé
     potential_files = [
         "/content/cookies.txt",
-        "/content/cookies_complets.txt",
+        "/content/cookies_complets.txt", 
         "/content/cookies_full.txt"
     ]
     
@@ -195,7 +241,7 @@ def clean_cookies_interactive():
     
     if not input_file:
         print("❌ Aucun fichier cookies détecté dans /content/")
-        print("   Uploadez d'abord votre fichier cookies.txt")
+        print("   Uploadez d'abord votre fichier cookies.txt via l'interface Colab")
         return False
     
     print(f"📁 Fichier détecté: {input_file}")
@@ -204,11 +250,15 @@ def clean_cookies_interactive():
     output_file = "/content/cookies_youtube_clean.txt"
     
     try:
-        # Utilisation du script de nettoyage intégré
+        # Vérification que nous sommes dans le bon dossier
+        if not os.path.exists("scripts/clean_cookies.py"):
+            os.chdir(PROJECT_DIR)
+        
+        # Utilisation du script de nettoyage
         result = subprocess.run([
             "python", "scripts/clean_cookies.py", 
             input_file, output_file
-        ], capture_output=True, text=True, cwd=PROJECT_DIR)
+        ], capture_output=True, text=True)
         
         if result.returncode == 0:
             print("✅ Cookies nettoyés avec succès!")
@@ -238,7 +288,6 @@ def clean_cookies_interactive():
         print(f"❌ Erreur: {e}")
         return False
 
-# === UTILISATION PRINCIPALE ===
 def transcribe_video(
     url: str, 
     model: str = "turbo", 
@@ -368,7 +417,7 @@ def _show_troubleshooting_tips():
    → Relancez la transcription, yt-dlp a des mécanismes de retry
     """)
 
-# === EXEMPLES ET RACCOURCIS ===
+# === FONCTIONS DE COMMODITÉ ===
 def quick_setup():
     """Setup rapide en une commande."""
     return setup_colab_environment()
@@ -380,7 +429,9 @@ def demo_transcribe():
     # Vérification du setup
     if not os.path.exists(PROJECT_DIR):
         print("🔧 Configuration automatique...")
-        setup_colab_environment()
+        if not setup_colab_environment():
+            print("❌ Configuration échouée")
+            return None
     
     print("\n📋 Exemples d'utilisation:")
     print("""
@@ -396,7 +447,7 @@ transcribe_video(
 
 # 3. Transcription en français vers texte
 transcribe_video(
-    "https://youtube.com/watch?v=VIDEO_ID",
+    "https://youtube.com/watch?v=VIDEO_ID", 
     language="fr",
     output_format="txt"
 )
@@ -423,7 +474,7 @@ def show_project_info():
 🎯 Fonctionnalités:
   • Transcription locale avec Whisper
   • Support vocabulaire métier SWOOD
-  • Corrections post-transcription intelligentes
+  • Corrections post-transcription intelligentes  
   • Gestion sécurisée des cookies YouTube
   • Export SRT et TXT
 
@@ -447,7 +498,7 @@ if __name__ == "__main__":
         import google.colab
         print("🔍 Environnement Google Colab détecté")
         
-        # Setup automatique
+        # Setup automatique si pas encore fait
         if not os.path.exists(PROJECT_DIR):
             print("🚀 Premier lancement - Configuration automatique...")
             setup_colab_environment()
@@ -459,4 +510,4 @@ if __name__ == "__main__":
         
     except ImportError:
         print("⚠️  Ce script est optimisé pour Google Colab")
-        print("   Utilisez transcribe_video(url) après avoir configuré l'environnement")
+        print("   Pour usage local, consultez la documentation principale")

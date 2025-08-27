@@ -1,157 +1,117 @@
 """
-🚀 QUICKSTART COLAB - YT-Whisper-Scribe
-Configuration rapide avec cookies YouTube sécurisés
+⚡ YT-WHISPER-SCRIBE - QUICKSTART ULTRA-RAPIDE POUR COLAB
+Une seule ligne pour tout configurer et commencer!
 """
 
-import os
-import subprocess
-from pathlib import Path
+def quickstart_colab():
+    """Configuration ultra-rapide en une seule fonction."""
+    
+    print("⚡ QUICKSTART YT-WHISPER-SCRIBE")
+    print("=" * 40)
+    
+    import subprocess
+    import os
+    
+    # Téléchargement du configurateur principal
+    if not os.path.exists('/content/colab_setup.py'):
+        print("📥 Téléchargement des outils...")
+        try:
+            subprocess.run([
+                'wget', '-q', 
+                'https://raw.githubusercontent.com/Jojo4911/yt-whisper-scribe/main/examples/colab_setup.py',
+                '-O', '/content/colab_setup.py'
+            ], check=True)
+        except Exception as e:
+            print(f"❌ Erreur de téléchargement: {e}")
+            print("🔧 Configuration manuelle...")
+            return _manual_setup()
+    
+    # Import et configuration automatique
+    try:
+        exec(open('/content/colab_setup.py').read())
+        print("\n✨ Configuration terminée! Utilisez transcribe_video(url)")
+        return True
+    except Exception as e:
+        print(f"❌ Erreur lors de la configuration: {e}")
+        return _manual_setup()
 
-def setup_yt_whisper_colab():
-    """Setup complet pour Google Colab avec cookies sécurisés"""
+def _manual_setup():
+    """Configuration manuelle de secours."""
+    import subprocess
+    import os
     
-    print("=" * 60)
-    print("🚀 YT-WHISPER-SCRIBE - SETUP COLAB")
-    print("=" * 60)
+    print("🔧 Configuration manuelle...")
     
-    # 1. Clone du projet
-    print("\n📥 1. Clonage du projet...")
+    # Clone du projet
     if not os.path.exists('/content/yt-whisper-scribe'):
-        os.system('git clone https://github.com/Jojo4911/yt-whisper-scribe.git')
+        subprocess.run([
+            'git', 'clone', 
+            'https://github.com/Jojo4911/yt-whisper-scribe.git',
+            '/content/yt-whisper-scribe'
+        ], check=True)
     
     os.chdir('/content/yt-whisper-scribe')
-    print("✅ Projet cloné et actif")
     
-    # 2. Installation des dépendances
-    print("\n📦 2. Installation des dépendances...")
-    os.system('pip install -r requirements.txt --quiet')
-    os.system('pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 --quiet')
-    print("✅ Dépendances installées")
+    # Installation des dépendances
+    subprocess.run(['pip', 'install', '-r', 'requirements.txt', '--quiet'], check=True)
     
-    # 3. Vérification GPU
-    print("\n🎮 3. Vérification GPU...")
-    try:
-        import torch
-        if torch.cuda.is_available():
-            gpu_name = torch.cuda.get_device_name(0)
-            print(f"✅ GPU détecté: {gpu_name}")
-        else:
-            print("⚠️  CPU seulement (plus lent)")
-    except:
-        print("⚠️  PyTorch non installé correctement")
-    
-    # 4. Configuration cookies
-    print("\n🍪 4. Configuration des cookies...")
-    print("""
-MÉTHODES POUR UTILISER LES COOKIES:
-
-A) Upload direct (temporaire):
-   - Upload ton fichier cookies_youtube.txt via l'interface Colab
-   - Il sera automatiquement détecté dans data/cookies.txt
-   
-B) Google Drive (persistant):
-   from google.colab import drive
-   drive.mount('/content/drive')
-   # Copie ton fichier dans: /content/drive/My Drive/cookies_youtube.txt
-   
-C) Variable d'environnement:
-   import os
-   os.environ['YT_COOKIES_FILE'] = '/chemin/vers/ton/fichier'
-    """)
-    
+    print("✅ Configuration manuelle terminée!")
     return True
 
-def transcribe_video(url, model="turbo", use_swood_glossary=True, output_format="srt"):
-    """Transcrit une vidéo YouTube avec configuration optimisée Colab"""
+def transcribe_simple(url: str):
+    """Transcription ultra-simple."""
+    import subprocess
+    import os
     
-    print(f"\n🎬 Transcription: {url}")
-    print(f"📊 Modèle: {model}")
-    print(f"📝 Format: {output_format}")
+    if not os.path.exists('/content/yt-whisper-scribe'):
+        print("❌ Projet non configuré. Exécutez quickstart_colab() d'abord.")
+        return None
     
-    # Construction de la commande
+    os.chdir('/content/yt-whisper-scribe')
+    
+    print(f"🎬 Transcription: {url}")
+    
     cmd = [
-        "python", "scripts/transcribe.py", url,
-        "--model", model,
-        "--output_format", output_format,
-        "--device", "auto",  # Détection auto GPU/CPU
-        "--verbose"
+        'python', 'scripts/transcribe.py', url,
+        '--model', 'turbo',
+        '--output_format', 'srt',
+        '--device', 'auto',
+        '--verbose'
     ]
     
-    # Ajout du glossaire SWOOD si demandé
-    if use_swood_glossary and os.path.exists("SWOOD_Glossary.json"):
-        cmd.extend(["--replace-map", "SWOOD_Glossary.json"])
-        print("🔧 Glossaire SWOOD activé")
+    result = subprocess.run(cmd)
     
-    # Vérification des cookies
-    cookies_paths = [
-        "/content/yt-whisper-scribe/data/cookies.txt",
-        "/content/drive/My Drive/cookies_youtube.txt",
-        "/content/cookies.txt"
-    ]
-    
-    for cookie_path in cookies_paths:
-        if os.path.exists(cookie_path):
-            cmd.extend(["--cookies-file", cookie_path])
-            print(f"🍪 Cookies trouvés: {cookie_path}")
-            break
-    else:
-        print("⚠️  Pas de cookies détectés (peut échouer sur certaines vidéos)")
-    
-    # Exécution
-    print("\n" + "="*50)
-    print("🚀 DÉBUT TRANSCRIPTION")
-    print("="*50)
-    
-    result = subprocess.run(cmd, capture_output=False, text=True)
-    
-    print("\n" + "="*50)
     if result.returncode == 0:
-        print("✅ TRANSCRIPTION RÉUSSIE!")
+        print("✅ Transcription terminée!")
         
-        # Affichage des fichiers générés
-        data_dir = Path("/content/yt-whisper-scribe/data")
+        # Recherche du fichier généré
+        from pathlib import Path
+        data_dir = Path("data")
         if data_dir.exists():
-            files = list(data_dir.glob(f"*.{output_format}"))
+            files = list(data_dir.glob("*.srt"))
             if files:
-                latest_file = max(files, key=os.path.getmtime)
-                print(f"📁 Fichier généré: {latest_file}")
-                return str(latest_file)
-    else:
-        print("❌ ÉCHEC DE LA TRANSCRIPTION")
-        print("Vérifiez l'URL et la configuration des cookies")
+                latest = max(files, key=lambda p: p.stat().st_mtime)
+                print(f"📁 Fichier: {latest}")
+                return str(latest)
     
-    print("="*50)
+    print("❌ Échec de la transcription")
     return None
 
-def quick_demo():
-    """Démonstration rapide"""
-    print("\n🎯 DÉMONSTRATION RAPIDE")
-    print("Pour utiliser le système:")
-    print("""
-# 1. Setup initial
-setup_yt_whisper_colab()
-
-# 2. Transcription simple
-file_path = transcribe_video("https://youtube.com/watch?v=VIDEO_ID")
-
-# 3. Transcription avancée avec SWOOD
-file_path = transcribe_video(
-    url="https://youtube.com/watch?v=VIDEO_ID",
-    model="medium",  # ou "large" pour plus de précision
-    use_swood_glossary=True,
-    output_format="srt"
-)
-
-# 4. Lire le résultat
-if file_path:
-    with open(file_path, 'r', encoding='utf-8') as f:
-        print(f.read()[:500])  # Premiers 500 caractères
-    """)
-
-# Exécution automatique si appelé directement
+# === UTILISATION DIRECTE ===
 if __name__ == "__main__":
-    if 'google.colab' in str(get_ipython()):
-        setup_yt_whisper_colab()
-        quick_demo()
-    else:
-        print("⚠️  Ce script est conçu pour Google Colab")
+    # Configuration automatique
+    quickstart_colab()
+    
+    # Exemple interactif
+    try:
+        url = input("\n🎬 URL YouTube (Enter pour ignorer): ").strip()
+        if url and ("youtube.com" in url or "youtu.be" in url):
+            transcribe_simple(url)
+        else:
+            print("💡 Utilisez transcribe_simple('URL') pour transcription rapide")
+    except KeyboardInterrupt:
+        print("\n👋 Configuration terminée!")
+        
+    print("\n📖 FONCTIONS DISPONIBLES:")
+    print("  • transcribe_simple('URL') - Transcription rapide")
+    print("  • quickstart_colab() - Reconfiguration si besoin")

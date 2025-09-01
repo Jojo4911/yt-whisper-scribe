@@ -138,6 +138,7 @@ def transcribe_youtube(
         print("Erreur lors du téléchargement après plusieurs tentatives.")
         raise SystemExit(3)
     video_title = info_dict.get("title", "video_sans_titre")
+    video_id = info_dict.get("id", "unknown")
     temp_audio_file = f"{temp_stem}.{preferredcodec}"
 
     # Vocabulary prompt
@@ -236,10 +237,18 @@ def transcribe_youtube(
         spinner_thread.join(timeout=1)
         print(f"Durée de transcription: {_format_elapsed(t1 - t0)}")
 
-        # Output path
+        # Output path with pattern: <title>-<video_id>.<lang>.<ext>
         safe_title = re.sub(r"[\\/*?:\"<>|]", "", video_title).strip()
         safe_title = safe_title or "transcription"
-        output_path = os.path.join(output_dir, f"{safe_title}.{output_format}")
+        if task == "translate":
+            lang_tag = "en"
+        else:
+            if language:
+                lang_tag = str(language).lower()
+            else:
+                lang_tag = str(result.get("language", "unk")).lower()
+        output_filename = f"{safe_title}-{video_id}.{lang_tag}.{output_format}"
+        output_path = os.path.join(output_dir, output_filename)
 
         # Existing file behavior: overwrite by default unless --skip-existing is set
         if os.path.exists(output_path):

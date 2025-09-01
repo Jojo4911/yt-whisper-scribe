@@ -5,7 +5,7 @@ Transcription locale de vidéos YouTube avec Whisper et vocabulaire personnalis�
 ## Prérequis
 - Python 3.9+
 - ffmpeg disponible dans le PATH (vérifier: `ffmpeg -version`)
-- PyTorch (compatible CPU ou CUDA selon votre machine)
+- PyTorch (CPU ou CUDA selon votre machine)
 
 Installation rapide:
 ```
@@ -35,32 +35,32 @@ python scripts/transcribe.py "URL_YOUTUBE" --model medium --vocab_file mon_vocab
 python scripts/transcribe.py "URL_YOUTUBE" --output_format txt --output_dir data/
 ```
 
-Pendant la transcription, un compteur de temps et un spinner s’affichent; à la fin, la durée exacte de la transcription est indiquée, ainsi qu’un temps total global pour toute la procédure.
+Pendant la transcription, un compteur et un spinner s’affichent; à la fin, la durée exacte de la transcription et le temps total global sont affichés.
 
 Options clés:
-- `--model {tiny,base,small,medium,large,large-v2,large-v3,large-v3-turbo,turbo}`: modèle Whisper (défaut: `turbo`). `large` suit l'alias; `turbo` est un raccourci pour `large-v3-turbo` (selon la version du package installé).
+- `--model {tiny,base,small,medium,large,large-v2,large-v3,large-v3-turbo,turbo}`: modèle Whisper (défaut: `turbo`). `turbo` est un alias pratique pour `large-v3-turbo`.
 - `--output_format {srt,txt}`: format de sortie.
 - `--output_dir PATH`: dossier de sortie (défaut: `data/`, créé si absent).
 - `--vocab_file FILE`: vocabulaire personnalisé (1 terme par ligne).
 - `--language fr|en|auto`: langue forcée (défaut: `en`). Utilisez `auto` pour détection automatique.
 - `--task transcribe|translate`: transcrire la langue source ou traduire en anglais.
-- `--verbose`: logs plus détaillés.
-- `--overwrite` / `--skip-existing`: si le fichier final existe, il est écrasé par défaut. Utilisez `--skip-existing` pour conserver l'existant.
-- `--cookies-file FILE`: chemin vers un `cookies.txt` exporté du navigateur pour YouTube. Si non fourni, le projet tente `data/cookies.txt` automatiquement.
-  - **Variable d'environnement**: `YT_COOKIES_FILE` pour définir le chemin des cookies de manière sécurisée.
-  - **Nettoyage sécurisé**: utilisez `python scripts/clean_cookies.py` pour ne garder que les cookies YouTube.
-- `--device auto|cuda|cpu`: périphérique d'exécution (défaut: `cuda`). Utilisez `auto` pour sélection automatique si besoin.
- - Post-traitement (glossaire de corrections):
-   - `--replace-map FILE.json`: active les remplacements basés sur un glossaire (variants -> terme correct). Par défaut, `SWOOD_Glossary.json` est appliqué.
-   - `--dry-run-replace`: suggère sans appliquer (journalise uniquement).
+- `--verbose`: logs détaillés.
+- `--overwrite` / `--skip-existing`: comportement vis-à-vis des fichiers existants.
+- `--cookies-file FILE`: chemin vers un `cookies.txt` exporté du navigateur pour YouTube. Si non fourni, le projet tente `data/cookies.txt` automatiquement (ou la variable d’env. ci-dessous).
+- `--device auto|cuda|cpu`: périphérique d’exécution (défaut: `cuda`). `auto` choisit `cuda` si dispo, sinon `cpu`.
+- `--temperature float`: température Whisper (0.0 favorise le vocabulaire).
+- `--no-condition-prev`: désactive le contexte du texte précédent.
+- Post-traitement (glossaire):
+  - `--replace-map FILE.json`: remplacements basés sur un glossaire (variants -> terme correct). Par défaut, `SWOOD_Glossary.json` est appliqué.
+  - `--dry-run-replace`: suggère sans appliquer (journalise uniquement).
 
 ## Structure du projet
 - `src/yt_whisper_scribe/`: logique applicative (pipeline, SRT utils).
-- `scripts/transcribe.py`: point d’entrée CLI.
-- `tests/`: tests unitaires (ajout de `src` au `PYTHONPATH`).
+- `scripts/transcribe.py`: point d’entrée CLI officiel.
+- `tests/`: tests unitaires (ajoute `src` au `PYTHONPATH`).
 - `data/`: sorties locales (ignoré par Git).
 
-Note: `transcribe_youtube.py` est conservé pour compatibilité, mais l’entrée officielle est `scripts/transcribe.py`.
+Note: le shim historique `transcribe_youtube.py` a été retiré; utilisez uniquement `scripts/transcribe.py`.
 
 ## Conseils qualité
 - Préférez `m4a` comme format audio intermédiaire (qualité/poids). Pour une qualité maximale, utilisez `wav` (fichiers plus gros).
@@ -69,7 +69,7 @@ Note: `transcribe_youtube.py` est conservé pour compatibilité, mais l’entré
 
 ## Gestion sécurisée des cookies YouTube
 
-Pour contourner les restrictions YouTube sans exposer vos données personnelles :
+Pour contourner certaines restrictions YouTube sans exposer vos données personnelles :
 
 ### Méthode 1 - Nettoyage automatique (Recommandée)
 ```bash
@@ -87,13 +87,9 @@ export YT_COOKIES_FILE="/chemin/vers/cookies_youtube.txt"
 python scripts/transcribe.py "URL"  # Détection automatique
 ```
 
-### Méthode 3 - Google Colab sécurisé
-```python
-# Dans Colab, utilise le setup sécurisé
-exec(open('examples/colab_setup.py').read())
-```
+Note: les scripts et notebooks d’exemples (Colab) ont été retirés du dépôt.
 
-**⚠️ Sécurité :**
+Sécurité :
 - Ne partagez JAMAIS votre fichier cookies complet
 - Utilisez toujours le script de nettoyage
 - Les cookies YouTube nettoyés ne contiennent pas de données sensibles
@@ -105,4 +101,4 @@ exec(open('examples/colab_setup.py').read())
 
 ## Intégration continue (CI)
 Un workflow GitHub Actions exécute ruff, black (check) et les tests sur Python 3.9–3.11.
-Rien à faire de votre côté si le dépôt est sur GitHub.
+

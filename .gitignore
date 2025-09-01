@@ -1,4 +1,4 @@
-# Environnements
+﻿# Environnements
 .venv/
 env/
 
@@ -7,13 +7,13 @@ __pycache__/
 .pytest_cache/
 *.pyc
 
-# Données et artéfacts locaux
+# Donn├®es et art├®facts locaux
 data/
 *.m4a
 *.mp3
 *.wav
 
-# Sorties de démo (facultatif)
+# Sorties de d├®mo (facultatif)
 *.srt
 *.txt
 

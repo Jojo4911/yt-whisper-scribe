@@ -1,0 +1,10 @@
+# Noyau applicatif
+openai-whisper
+yt-dlp
+
+# Développement qualité
+black
+ruff
+pytest
+pytest-cov
+pre-commit

@@ -16,6 +16,7 @@ data/
 # Sorties de d├®mo (facultatif)
 *.srt
 *.txt
+!requirements.txt
 
 # OS
 .DS_Store

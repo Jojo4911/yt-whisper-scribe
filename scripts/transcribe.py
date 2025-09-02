@@ -24,7 +24,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--model",
         type=str,
-        default="turbo",
+        default="small",
         choices=[
             "tiny",
             "base",

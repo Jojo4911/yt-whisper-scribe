@@ -18,7 +18,7 @@ from .srt import generate_srt_content
 def transcribe_youtube(
     url: str,
     *,
-    model: str = "turbo",
+    model: str = "small",
     output_format: str = "srt",
     output_dir: str = "data",
     vocab_file: Optional[str] = None,

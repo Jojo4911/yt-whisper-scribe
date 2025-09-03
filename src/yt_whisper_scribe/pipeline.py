@@ -27,6 +27,7 @@ def transcribe_youtube(
     audio_format: str = "m4a",
     verbose: bool = False,
     device: str = "cuda",
+    fp16: Optional[bool] = None,
     temperature: float = 0.0,
     condition_on_previous_text: bool = True,
     replace_map: Optional[str] = "SWOOD_Glossary.json",
@@ -226,7 +227,7 @@ def transcribe_youtube(
         result = wmodel.transcribe(
             temp_audio_file,
             initial_prompt=initial_prompt,
-            fp16=(run_device == "cuda"),
+            fp16=(fp16 if fp16 is not None else (run_device == "cuda")),
             language=language,
             task=task,
             temperature=temperature,

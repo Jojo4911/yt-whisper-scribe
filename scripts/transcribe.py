@@ -133,6 +133,16 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         help="Chemin vers un cookies.txt exporté du navigateur (yt-dlp)",
     )
+    parser.add_argument(
+        "--fp16",
+        type=str,
+        choices=["auto", "true", "false"],
+        default="auto",
+        help=(
+            "Precision for CUDA: auto (default), true (FP16), false (FP32). "
+            "Useful if some GPU/driver/torch combos produce degenerate outputs."
+        ),
+    )
     return parser
 
 
@@ -152,6 +162,7 @@ def main() -> None:
         audio_format=args.audio_format,
         verbose=args.verbose,
         device=args.device,
+        fp16=(None if args.fp16 == "auto" else (args.fp16 == "true")),
         temperature=args.temperature,
         condition_on_previous_text=(not args.no_condition_prev),
         replace_map=args.replace_map,

@@ -24,3 +24,8 @@ Thumbs.db
 
 # Claude Code
 .claude/
+
+# Allow keeping the data folder tracked with a placeholder
+!data/
+data/*
+!data/.gitkeep

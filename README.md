@@ -101,3 +101,12 @@ Sécurité :
 
 ## Intégration continue (CI)
 Un workflow GitHub Actions exécute ruff, black (check) et les tests sur Python 3.9–3.11.
+## Dépannage GPU / CUDA
+
+Si `--device cpu` fonctionne mais `--device cuda` produit des SRT remplis de ponctuation ("!!!!"), essayez:
+
+- Forcer FP32 sur GPU: `--fp16 false` (ex.: `python scripts/transcribe.py "URL" --device cuda --fp16 false`)
+- Mettre à jour le pilote NVIDIA pour correspondre à la version CUDA de PyTorch (voir `nvidia-smi`).
+- Réinstaller PyTorch avec une build CUDA adaptée à votre GPU/driver (par ex. cu121) si la build actuelle (ex. cu128) pose problème.
+
+Voir aussi: `TROUBLESHOOTING.md`.
